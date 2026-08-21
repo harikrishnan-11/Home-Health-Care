@@ -19,18 +19,22 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
     }
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.contains('active') ? closeMenu() : openMenu();
-    });
-    scrim.addEventListener('click', closeMenu);
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-    window.addEventListener('resize', () => { if (window.innerWidth > 1024) closeMenu(); });
+    if (hamburger && navLinks && scrim){
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.contains('active') ? closeMenu() : openMenu();
+        });
+        scrim.addEventListener('click', closeMenu);
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+        window.addEventListener('resize', () => { if (window.innerWidth > 1024) closeMenu(); });
+    }
 
     /* ---------- Sticky nav shadow on scroll ---------- */
     const nav = document.getElementById('site-nav');
-    window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 40);
-    });
+    if (nav){
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        });
+    }
 
     /* ---------- Scroll reveal ---------- */
     const revealEls = document.querySelectorAll('.reveal');
@@ -132,11 +136,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ---------- Back to top ---------- */
     const backToTop = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-        backToTop.classList.toggle('visible', window.scrollY > 480);
-    });
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    if (backToTop){
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 480);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
 });

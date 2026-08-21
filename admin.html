@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<title>Care Team Dashboard — Stackly Home Health Care</title>
+<style>
+/* =========================================================
+   STACKLY HOME HEALTH CARE — ADMIN / CARE TEAM DASHBOARD
+   (shares design tokens with the marketing site: deep teal + warm gold)
+========================================================= */
+:root{
+  --primary:#0B4A56;
+  --primary-dark:#073238;
+  --secondary:#F6C98A;
+  --secondary-soft:#FDE9C8;
+  --cream:#FFFBF4;
+  --ink:#16262A;
+  --ink-soft:#55666A;
+  --ink-faint:#8FA0A2;
+  --line:rgba(11,74,86,0.14);
+  --white:#ffffff;
+
+  --bg-body:var(--cream);
+  --bg-section:var(--secondary-soft);
+
+  --shadow-sm:0 6px 18px rgba(7,50,56,0.08);
+  --shadow-md:0 16px 36px rgba(7,50,56,0.12);
+  --shadow-lg:0 28px 60px rgba(7,50,56,0.20);
+
+  --radius-sm:10px;
+  --radius-md:18px;
+  --radius-full:999px;
+
+  --space-xs:6px; --space-sm:10px; --space-md:16px; --space-lg:24px;
+  --space-xl:32px; --space-2xl:48px; --space-3xl:64px;
+
+  --fs-xs:0.85rem; --fs-sm:0.95rem; --fs-md:1.05rem; --fs-lg:1.5rem; --fs-xl:2rem;
+  --fw-medium:500; --fw-semibold:600; --fw-bold:700; --fw-extrabold:800;
+  --tracking-wide:0.08em;
+  --lh-body:1.6;
+
+  --f-display:'Poppins', sans-serif;
+  --f-body:'Poppins', sans-serif;
+  --f-mono:'Space Mono', monospace;
+
+  --transition:all 0.25s ease;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{ font-family:var(--f-body); color:var(--ink); line-height:var(--lh-body); -webkit-font-smoothing:antialiased; background:var(--bg-body); }
+img{ max-width:100%; display:block; }
+a{ text-decoration:none; color:inherit; }
+ul{ list-style:none; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+input, select, textarea{ font-family:inherit; }
+
+::-webkit-scrollbar{ width:8px; height:8px; }
+::-webkit-scrollbar-thumb{ background:rgba(246,201,138,0.55); border-radius:8px; }
+::-webkit-scrollbar-track{ background:transparent; }
+
+/* ========== LOGO ========== */
+.logo{ display:flex; align-items:center; gap:.6em; font-family:var(--f-display); font-weight:var(--fw-bold); font-size:1.15rem; color:var(--white);width: 200px; height: 60px; }
+.logo img{
+    width: 100%;
+    height: 60px;
+    object-fit: cover;
+}
+.logo-mark{
+    width:38px; height:38px; border-radius:12px; flex-shrink:0;
+    background:linear-gradient(150deg, var(--secondary), #eab863);
+    display:flex; align-items:center; justify-content:center; color:var(--primary-dark); font-size:1rem;
+}
+.logo-text{ display:flex; flex-direction:column; line-height:1.15; }
+.logo-text span{ font-family:var(--f-mono); font-size:0.6rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--secondary); font-weight:700; }
+
+/* ========== SHELL ========== */
+.dash-shell{ display:flex; min-height:100vh; }
+
+/* ========== SIDEBAR ========== */
+.sidebar{
+    width:270px; height:100vh; flex-shrink:0; background:var(--primary-dark);
+    position:sticky; top:0; display:flex; flex-direction:column;
+    padding:var(--space-lg) var(--space-lg) var(--space-xl); z-index:200; transition:var(--transition);
+}
+.sidebar-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-xl); }
+.sidebar-close{ display:none; background:none; border:none; color:var(--white); font-size:var(--fs-lg); cursor:pointer; }
+
+.sidebar-user{ display:none; align-items:center; gap:var(--space-md); padding:var(--space-md); background:rgba(255,255,255,.06); border-radius:var(--radius-md); margin-bottom:var(--space-xl); }
+.sidebar-avatar{ width:42px; height:42px; border-radius:var(--radius-full); background:var(--secondary); color:var(--primary-dark); display:flex; align-items:center; justify-content:center; font-family:var(--f-display); font-weight:var(--fw-bold); font-size:var(--fs-sm); flex-shrink:0; }
+.sidebar-user-name{ color:var(--white); font-weight:var(--fw-semibold); font-size:var(--fs-sm); }
+.sidebar-user-email{ color:rgba(255,255,255,.55); font-size:.78rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+.sidebar-nav{ display:flex; flex-direction:column; gap:2px; overflow-y:auto; }
+.nav-label{ color:rgba(255,255,255,.38); font-family:var(--f-mono); font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:var(--tracking-wide); margin:var(--space-lg) 0 var(--space-xs) var(--space-sm); }
+.nav-label:first-child{ margin-top:0; }
+
+.nav-link{ display:flex; align-items:center; gap:var(--space-md); color:rgba(255,255,255,.82); font-weight:var(--fw-medium); font-size:var(--fs-sm); padding:var(--space-sm) var(--space-md); border-radius:var(--radius-sm); position:relative; transition:var(--transition); }
+.nav-link i{ width:18px; text-align:center; font-size:.95rem; }
+.nav-link:hover{ background:rgba(255,255,255,.08); color:var(--white); }
+.nav-link.active{ background:var(--secondary); color:var(--primary-dark); }
+.nav-link-danger{ margin-top:var(--space-lg); color:rgba(255,255,255,.7); }
+.nav-link-danger:hover{ background:rgba(198,57,46,.18); color:#ffb3ab; }
+
+.sidebar-overlay{ display:none; position:fixed; inset:0; background:rgba(7,50,56,.55); z-index:190; }
+
+/* ========== MAIN ========== */
+.dash-main{ flex:1; min-width:0; display:flex; flex-direction:column; }
+
+.topbar{ position:sticky; top:0; z-index:100; background:var(--white); border-bottom:1px solid var(--line); display:flex; align-items:center; gap:var(--space-lg); padding:var(--space-md) var(--space-xl); }
+.menu-toggle{ display:none; background:none; border:none; color:var(--primary); font-size:var(--fs-lg); cursor:pointer; }
+.topbar-search{ flex:1; display:flex; align-items:center; gap:var(--space-sm); padding:var(--space-sm) var(--space-lg); color:var(--primary-dark); font-family:var(--f-display); font-weight:var(--fw-semibold); font-size:var(--fs-sm); }
+.topbar-actions{ margin-left:auto; display:flex; align-items:center; gap:var(--space-lg); }
+
+.icon-btn{ display:flex; position:relative; width:40px; height:40px; border-radius:var(--radius-full); border:1px solid var(--line); background:var(--white); color:var(--primary); cursor:pointer; align-items:center; justify-content:center; transition:var(--transition); }
+.icon-btn:hover{ background:var(--bg-section); }
+.notif-dot{ position:absolute; top:8px; right:9px; width:7px; height:7px; border-radius:50%; background:#c23c3c; }
+
+.topbar-user{ display:flex; align-items:center; gap:var(--space-sm); cursor:pointer; }
+.topbar-avatar{ width:38px; height:38px; border-radius:var(--radius-full); background:var(--primary); color:var(--white); display:flex; align-items:center; justify-content:center; font-family:var(--f-display); font-weight:var(--fw-bold); font-size:.82rem; }
+.topbar-user-name{ font-weight:var(--fw-semibold); font-size:var(--fs-xs); color:var(--primary-dark); }
+.topbar-user-email{ font-size:.74rem; color:var(--ink-faint); }
+.topbar-user>i{ display:none; color:var(--ink-faint); font-size:.75rem; }
+
+/* ========== SECTIONS ========== */
+.dash-section{ display:none; padding:var(--space-xl) var(--space-xl) var(--space-3xl); animation:fadeSlideIn .4s ease; }
+.dash-section.active{ display:block; }
+@keyframes fadeSlideIn{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:translateY(0); } }
+
+.section-head{ display:flex; align-items:center; justify-content:space-between; gap:var(--space-lg); flex-wrap:wrap; margin-bottom:var(--space-xl); }
+.section-head h1{ font-family:var(--f-display); font-size:var(--fs-xl); color:var(--primary-dark); font-weight:var(--fw-extrabold); }
+.section-sub{ color:var(--ink-soft); font-size:var(--fs-sm); margin-top:4px; }
+
+.btn-primary{ display:inline-flex; align-items:center; gap:var(--space-sm); background:var(--primary); color:var(--white); font-weight:var(--fw-semibold); font-size:var(--fs-sm); padding:var(--space-sm) var(--space-lg); border-radius:var(--radius-full); border:none; cursor:pointer; transition:var(--transition); }
+.btn-primary:hover{ background:var(--primary-dark); transform:translateY(-2px); box-shadow:var(--shadow-sm); }
+.btn-ghost{ display:inline-flex; align-items:center; gap:var(--space-sm); background:var(--white); color:var(--primary); font-weight:var(--fw-semibold); font-size:var(--fs-sm); padding:var(--space-sm) var(--space-lg); border-radius:var(--radius-full); border:1px solid var(--line); cursor:pointer; transition:var(--transition); }
+.btn-ghost:hover{ border-color:var(--secondary); color:var(--primary-dark); background:var(--secondary-soft); }
+
+/* ========== KPI CARDS ========== */
+.kpi-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:var(--space-lg); margin-bottom:var(--space-xl); }
+.kpi-grid-3{ grid-template-columns:repeat(3, 1fr); }
+.kpi-card{ background:var(--white); border:1px solid var(--line); border-radius:var(--radius-md); padding:var(--space-lg); transition:var(--transition); animation:fadeSlideIn .5s ease backwards; }
+.kpi-card:nth-child(2){ animation-delay:.05s; } .kpi-card:nth-child(3){ animation-delay:.1s; } .kpi-card:nth-child(4){ animation-delay:.15s; }
+.kpi-card:hover{ box-shadow:var(--shadow-md); transform:translateY(-4px); }
+.kpi-icon{ width:40px; height:40px; border-radius:var(--radius-sm); background:var(--bg-section); color:var(--primary); display:flex; align-items:center; justify-content:center; margin-bottom:var(--space-md); font-size:1rem; }
+.kpi-card h3{ font-family:var(--f-display); font-size:var(--fs-xl); color:var(--primary-dark); font-weight:var(--fw-extrabold); }
+.kpi-card p{ color:var(--ink-soft); font-size:var(--fs-xs); margin-top:4px; }
+.kpi-trend{ display:inline-flex; align-items:center; gap:5px; margin-top:var(--space-sm); font-weight:var(--fw-semibold); font-size:.72rem; }
+.kpi-trend-up{ color:#177a4c; }
+.kpi-trend-down{ color:#c23c3c; }
+
+/* ========== PANEL / TABLE ========== */
+.panel{ background:var(--white); border:1px solid var(--line); border-radius:var(--radius-md); padding:var(--space-lg); min-width:0; }
+.panel-head{ display:flex; align-items:center; justify-content:space-between; gap:var(--space-md); flex-wrap:wrap; margin-bottom:var(--space-lg); }
+.panel-head h2{ font-family:var(--f-display); font-size:var(--fs-md); color:var(--primary-dark); font-weight:var(--fw-bold); }
+.panel-head-actions{ display:flex; align-items:center; gap:var(--space-md); }
+.link-read{ color:var(--primary); font-weight:var(--fw-semibold); font-size:var(--fs-xs); display:inline-flex; align-items:center; gap:6px; }
+.link-read:hover{ color:var(--primary-dark); text-decoration:underline; }
+
+.table-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+table{ width:100%; border-collapse:collapse; font-size:var(--fs-xs); min-width:560px; }
+thead th{ text-align:left; color:var(--ink-faint); font-weight:var(--fw-semibold); padding:var(--space-sm) var(--space-md); border-bottom:1px solid var(--line); white-space:nowrap; }
+tbody td{ padding:var(--space-md); color:var(--ink); border-bottom:1px solid var(--line); }
+tbody tr:last-child td{ border-bottom:none; }
+tbody tr{ transition:var(--transition); }
+tbody tr:hover{ background:var(--cream); }
+
+.status{ display:inline-block; padding:4px 12px; border-radius:var(--radius-full); font-weight:var(--fw-semibold); font-size:.72rem; white-space:nowrap; }
+.status-transit{ background:rgba(246,201,138,.32); color:#8a5c11; }
+.status-delivered{ background:rgba(23,122,76,.12); color:#177a4c; }
+.status-pending{ background:rgba(198,57,46,.1); color:#c23c3c; }
+
+/* ========== TEAM ========== */
+.team-dash-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:var(--space-lg); }
+.team-dash-card{ background:var(--white); border:1px solid var(--line); border-radius:var(--radius-md); padding:var(--space-xl) var(--space-lg); text-align:center; transition:var(--transition); }
+.team-dash-card:hover{ box-shadow:var(--shadow-md); transform:translateY(-4px); }
+.team-dash-avatar{ width:56px; height:56px; border-radius:var(--radius-full); background:var(--primary); color:var(--white); display:flex; align-items:center; justify-content:center; font-family:var(--f-display); font-weight:var(--fw-bold); margin:0 auto var(--space-md); }
+.team-dash-card h3{ font-family:var(--f-display); color:var(--primary-dark); font-size:var(--fs-sm); font-weight:var(--fw-bold); }
+.team-dash-card p{ color:var(--ink-soft); font-size:var(--fs-xs); margin:4px 0 var(--space-md); }
+
+/* ========== BADGES ========== */
+.role-badge{ display:inline-block; padding:4px 12px; border-radius:var(--radius-full); font-weight:var(--fw-semibold); font-size:.72rem; }
+.role-admin{ background:rgba(246,201,138,.4); color:#7a4e0c; }
+.role-customer{ background:rgba(11,74,86,.08); color:var(--ink-soft); }
+.sidebar-user .role-badge{ margin-left:auto; flex-shrink:0; }
+
+/* ========== CONTENT GRID ========== */
+.content-grid{ display:grid; width:100%; grid-template-columns:1.4fr 1fr; gap:var(--space-lg); align-items:start; margin-bottom:var(--space-lg); }
+
+/* ========== QUICK ACTIONS ========== */
+.quick-actions{ display:grid; grid-template-columns:repeat(4, 1fr); gap:var(--space-lg); margin-bottom:var(--space-xl); }
+.quick-action{ display:flex; align-items:center; gap:var(--space-md); background:var(--white); border:1px solid var(--line); border-radius:var(--radius-md); padding:var(--space-md) var(--space-lg); color:var(--primary-dark); font-weight:var(--fw-semibold); font-size:var(--fs-xs); transition:var(--transition); }
+.quick-action:hover{ border-color:var(--secondary); box-shadow:var(--shadow-sm); transform:translateY(-3px); }
+.quick-action-icon{ width:36px; height:36px; border-radius:var(--radius-sm); background:var(--bg-section); color:var(--primary); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+/* ========== ACTIVITY FEED ========== */
+.activity-feed{ display:flex; flex-direction:column; gap:var(--space-lg); }
+.activity-item{ display:flex; gap:var(--space-md); align-items:flex-start; }
+.activity-item p{ font-size:var(--fs-xs); color:var(--ink); line-height:var(--lh-body); }
+.activity-time{ font-size:.72rem; color:var(--ink-faint); }
+.activity-icon{ width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.8rem; }
+.activity-icon-transit{ background:rgba(246,201,138,.32); color:#8a5c11; }
+.activity-icon-delivered{ background:rgba(23,122,76,.12); color:#177a4c; }
+.activity-icon-pending{ background:rgba(198,57,46,.1); color:#c23c3c; }
+
+/* ========== FILTER TABS ========== */
+.filter-tabs{ display:flex; gap:var(--space-sm); flex-wrap:wrap; margin-bottom:var(--space-lg); overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:2px; }
+.filter-tab{ background:var(--white); border:1px solid var(--line); color:var(--ink-soft); font-weight:var(--fw-semibold); font-size:var(--fs-xs); padding:var(--space-xs) var(--space-lg); border-radius:var(--radius-full); cursor:pointer; transition:var(--transition); white-space:nowrap; flex-shrink:0; }
+.filter-tab:hover{ border-color:var(--secondary); color:var(--primary-dark); }
+.filter-tab.active{ background:var(--primary); border-color:var(--primary); color:var(--white); }
+
+/* ========== BAR CHART ========== */
+.bar-chart{ display:flex; align-items:flex-end; gap:var(--space-lg); height:200px; padding-top:var(--space-lg); }
+.bar-col{ flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end; gap:var(--space-sm); }
+.bar{ width:100%; max-width:34px; height:var(--h, 40%); background:var(--bg-section); border-radius:6px 6px 0 0; transition:var(--transition); animation:growUp .6s ease backwards; }
+.bar-current{ background:var(--primary); }
+.bar-col label{ font-size:.72rem; color:var(--ink-faint); }
+@keyframes growUp{ from{ transform:scaleY(0); transform-origin:bottom; } to{ transform:scaleY(1); transform-origin:bottom; } }
+
+/* ========== LEGEND ========== */
+.legend-list{ display:flex; flex-direction:column; gap:var(--space-md); margin-bottom:var(--space-lg); font-size:var(--fs-xs); color:var(--primary-dark); }
+.legend-list li{ display:flex; align-items:center; gap:var(--space-sm); }
+.legend-list li strong{ margin-left:auto; }
+.legend-dot{ width:10px; height:10px; border-radius:50%; background:var(--c); flex-shrink:0; }
+.legend-bar{ display:flex; height:10px; border-radius:var(--radius-full); overflow:hidden; }
+.legend-bar span{ width:var(--w); background:var(--c); }
+
+/* ========== OVERVIEW CHARTS (line + donut) ========== */
+.chart-legend-inline{ display:inline-flex; align-items:center; gap:6px; font-weight:var(--fw-semibold); font-size:.72rem; color:var(--ink-soft); }
+.dot-swatch{ width:8px; height:8px; border-radius:50%; background:var(--c); flex-shrink:0; }
+.dot-swatch-line{ border-radius:2px; height:3px; }
+
+.line-chart-wrap{ width:100%; }
+.line-chart{ width:100%; height:200px; display:block; overflow:visible; }
+.line-chart-grid line{ stroke:var(--line); stroke-width:1; }
+.line-chart-area{ fill:rgba(11,74,86,.06); stroke:none; }
+.line-chart-path{ fill:none; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke; }
+.line-chart-path-revenue{ stroke:var(--primary); }
+.line-chart-path-orders{ stroke:#c99433; stroke-dasharray:6 6; opacity:.6; }
+.line-chart-dots circle{ fill:var(--primary); stroke:var(--white); stroke-width:2; }
+.line-chart-labels{ display:flex; justify-content:space-between; margin-top:var(--space-sm); font-size:.72rem; color:var(--ink-faint); }
+
+.donut-wrap{ display:flex; align-items:center; gap:var(--space-xl); flex-wrap:wrap; justify-content:center; padding:var(--space-md) 0; }
+.donut-chart{
+    --p1:58; --p2:24; --p3:18;
+    position:relative; width:168px; height:168px; border-radius:50%; flex-shrink:0;
+    background:conic-gradient(
+        var(--primary) 0% calc(var(--p1) * 1%),
+        var(--secondary) calc(var(--p1) * 1%) calc((var(--p1) + var(--p2)) * 1%),
+        #c99433 calc((var(--p1) + var(--p2)) * 1%) 100%
+    );
+    display:flex; align-items:center; justify-content:center; animation:donutIn .7s ease backwards;
+}
+@keyframes donutIn{ from{ opacity:0; transform:scale(.85) rotate(-30deg); } to{ opacity:1; transform:scale(1) rotate(0); } }
+.donut-center{ width:108px; height:108px; border-radius:50%; background:var(--white); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.donut-center strong{ font-family:var(--f-display); font-size:var(--fs-lg); color:var(--primary-dark); font-weight:var(--fw-extrabold); }
+.donut-center span{ font-size:.7rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:var(--tracking-wide); }
+.donut-legend{ margin-bottom:0; min-width:140px; flex:1; }
+
+/* ========== SETTINGS FORM ========== */
+.form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:var(--space-lg); margin-bottom:var(--space-xl); }
+.settings-form .field{ display:flex; flex-direction:column; gap:var(--space-xs); }
+.settings-form label{ font-weight:var(--fw-semibold); font-size:var(--fs-xs); color:var(--primary-dark); }
+.settings-form input{ padding:var(--space-sm) var(--space-md); border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--cream); font-size:var(--fs-sm); color:var(--primary-dark); width:100%; }
+.settings-form input:focus{ outline:2px solid var(--secondary); background:var(--white); }
+.settings-form input:disabled{ color:var(--ink-faint); cursor:not-allowed; }
+
+.toggle-row{ display:flex; align-items:center; justify-content:space-between; gap:var(--space-lg); padding:var(--space-md) 0; border-bottom:1px solid var(--line); }
+.toggle-row:last-child{ border-bottom:none; }
+.toggle-title{ font-weight:var(--fw-semibold); font-size:var(--fs-xs); color:var(--primary-dark); }
+.toggle-sub{ font-size:.74rem; color:var(--ink-faint); margin-top:2px; }
+
+.switch{ position:relative; display:inline-block; width:42px; height:24px; flex-shrink:0; }
+.switch input{ opacity:0; width:0; height:0; }
+.slider{ position:absolute; inset:0; background:var(--line); border-radius:var(--radius-full); cursor:pointer; transition:var(--transition); }
+.slider::before{ content:""; position:absolute; width:18px; height:18px; left:3px; top:3px; background:var(--white); border-radius:50%; transition:var(--transition); }
+.switch input:checked + .slider{ background:var(--primary); }
+.switch input:checked + .slider::before{ transform:translateX(18px); }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width:1200px){ .sidebar{ width:232px; } }
+@media (max-width:1024px){
+    .kpi-grid{ grid-template-columns:repeat(2, 1fr); }
+    .team-dash-grid{ grid-template-columns:repeat(2, 1fr); }
+    .content-grid{ grid-template-columns:1fr; }
+    .quick-actions{ grid-template-columns:repeat(2, 1fr); }
+    .kpi-grid-3{ grid-template-columns:1fr 1fr; }
+    .form-grid{ grid-template-columns:1fr; }
+    .donut-wrap{ justify-content:flex-start; }
+}
+@media (max-width:900px){
+    .sidebar{ position:fixed; left:0; top:0; height:100vh; width:min(280px, 82vw); transform:translateX(-100%); box-shadow:var(--shadow-lg); }
+    .sidebar.open{ transform:translateX(0); }
+    .sidebar-close{ display:block; }
+    .sidebar-overlay.show{ display:block; }
+    .menu-toggle{ display:flex; align-items:center; justify-content:center; }
+    .topbar-search{ display:none; }
+    .topbar{ gap:var(--space-md); }
+        .logo{ display:flex; align-items:center; gap:.6em; font-family:var(--f-display); font-weight:var(--fw-bold); font-size:1.15rem; color:var(--white);width: 150px; height: 60px; }
+}
+@media (max-width:640px){
+    .kpi-grid{ grid-template-columns:1fr 1fr; gap:var(--space-md); }
+    .kpi-card{ padding:var(--space-md); }
+    .kpi-card h3{ font-size:var(--fs-lg); }
+    .team-dash-grid{ grid-template-columns:1fr; }
+    .kpi-grid-3{ grid-template-columns:1fr; }
+    .section-head{ flex-direction:column; align-items:flex-start; }
+    .section-head .btn-primary{ width:100%; justify-content:center; }
+    .topbar{ padding:var(--space-md); }
+    .dash-section{ padding:var(--space-lg) var(--space-md) var(--space-2xl); }
+    .quick-actions{ grid-template-columns:1fr 1fr; gap:var(--space-sm); }
+    .quick-action{ padding:var(--space-sm) var(--space-md); font-size:.72rem; }
+    .quick-action-icon{ width:30px; height:30px; }
+    .panel{ padding:var(--space-md); }
+    .panel-head{ margin-bottom:var(--space-md); }
+    .bar-chart{ height:160px; gap:var(--space-sm); }
+    .line-chart{ height:160px; }
+    .donut-wrap{ flex-direction:column; align-items:center; text-align:center; gap:var(--space-lg); }
+    .donut-chart{ width:140px; height:140px; }
+    .donut-center{ width:92px; height:92px; }
+    .donut-legend{ width:100%; }
+    .topbar-user-text{ font-size:.5rem; }
+    .topbar-user>i{ display:none; }
+    .icon-btn{ width:36px; height:36px; }
+}
+@media (max-width:400px){
+    .kpi-grid{ grid-template-columns:1fr; }
+    .quick-actions{ grid-template-columns:1fr; }
+    .panel-head{ flex-direction:column; align-items:flex-start; gap:var(--space-sm); }
+    .panel-head-actions{ gap:var(--space-sm); }
+}
+@media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+}
+</style>
+</head>
+<body class="dashboard-body">
+
+<div class="dash-shell">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-top">
+     <a href="index.html" class="logo">
+              <img src="./src/logo/Untitled design.webp" alt="">
+            </a>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="sidebar-user">
+            <div class="sidebar-avatar">HK</div>
+            <div>
+                <p class="sidebar-user-name">Hari Krishnan</p>
+                <p class="sidebar-user-email">hari@care.stackly.example</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <p class="nav-label">Care Operations</p>
+            <a href="#overview" class="nav-link active" data-section="overview">
+                <i class="fa-solid fa-grip"></i> Overview
+            </a>
+            <a href="#patients" class="nav-link" data-section="patients">
+                <i class="fa-solid fa-house-medical-circle-check"></i> Patients
+            </a>
+            <a href="#caregivers" class="nav-link" data-section="caregivers">
+                <i class="fa-solid fa-user-nurse"></i> Caregivers
+            </a>
+            <a href="#visits" class="nav-link" data-section="visits">
+                <i class="fa-solid fa-calendar-check"></i> Visits &amp; Schedule
+            </a>
+            <a href="#careplans" class="nav-link" data-section="careplans">
+                <i class="fa-solid fa-notes-medical"></i> Care Plans &amp; Services
+            </a>
+
+            <p class="nav-label">Insights</p>
+            <a href="#analytics" class="nav-link" data-section="analytics">
+                <i class="fa-solid fa-chart-line"></i> Analytics
+            </a>
+            <a href="#reports" class="nav-link" data-section="reports">
+                <i class="fa-solid fa-file-lines"></i> Reports
+            </a>
+
+            <p class="nav-label">Account</p>
+            <a href="#settings" class="nav-link" data-section="settings">
+                <i class="fa-solid fa-gear"></i> Settings
+            </a>
+            <a href="./login.html" class="nav-link nav-link-danger">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Log out
+            </a>
+        </nav>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ============ MAIN ============ -->
+    <div class="dash-main">
+
+        <header class="topbar">
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="topbar-search">Care Team Dashboard</div>
+
+            <div class="topbar-actions">
+                <button class="icon-btn" id="notifBtn" aria-label="Notifications">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notif-dot"></span>
+                </button>
+                <div class="topbar-user">
+                    <div class="topbar-avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="topbar-user-text">
+                        <p class="topbar-user-name">Admin</p>
+                        <p class="topbar-user-email"><span id="dashboardEmail"></span></p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- ============ OVERVIEW ============ -->
+        <section class="dash-section active" id="overview">
+            <div class="section-head">
+                <div>
+                    <h1>Care Overview</h1>
+                    <p class="section-sub">Real-time activity across every patient, caregiver and home visit.</p>
+                </div>
+                <a href="./404.html" class="btn-primary">New Visit <i class="fa-solid fa-plus"></i></a>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <span class="kpi-icon"><i class="fa-solid fa-house-medical-circle-check"></i></span>
+                    <h3>142</h3>
+                    <p>Active patients</p>
+                    <span class="kpi-trend kpi-trend-up"><i class="fa-solid fa-arrow-trend-up"></i> 5.2%</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                    <h3>27</h3>
+                    <p>Visits scheduled today</p>
+                    <span class="kpi-trend kpi-trend-up"><i class="fa-solid fa-arrow-trend-up"></i> 3.1%</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-icon"><i class="fa-solid fa-user-nurse"></i></span>
+                    <h3>50</h3>
+                    <p>Caregivers on roster</p>
+                    <span class="kpi-trend kpi-trend-up"><i class="fa-solid fa-arrow-trend-up"></i> 1.8%</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-icon"><i class="fa-solid fa-star"></i></span>
+                    <h3>4.8</h3>
+                    <p>Family satisfaction</p>
+                    <span class="kpi-trend kpi-trend-up"><i class="fa-solid fa-arrow-trend-up"></i> 0.3%</span>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <a href="./404.html" class="quick-action">
+                    <span class="quick-action-icon"><i class="fa-solid fa-calendar-plus"></i></span>
+                    New Visit
+                </a>
+                <a href="./404.html" class="quick-action">
+                    <span class="quick-action-icon"><i class="fa-solid fa-user-plus"></i></span>
+                    Assign Caregiver
+                </a>
+                <a href="./404.html" class="quick-action">
+                    <span class="quick-action-icon"><i class="fa-solid fa-notes-medical"></i></span>
+                    Send Care Update
+                </a>
+                <a href="./404.html" class="quick-action">
+                    <span class="quick-action-icon"><i class="fa-solid fa-file-lines"></i></span>
+                    Generate Report
+                </a>
+            </div>
+
+            <!-- ===== Overview charts row ===== -->
+            <div class="content-grid overview-charts">
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2>Visits &amp; revenue trend</h2>
+                        <div class="panel-head-actions">
+                            <span class="chart-legend-inline"><span class="dot-swatch" style="--c:var(--primary)"></span>Revenue</span>
+                            <span class="chart-legend-inline"><span class="dot-swatch dot-swatch-line" style="--c:#c99433"></span>Visits</span>
+                        </div>
+                    </div>
+                    <div class="line-chart-wrap">
+                        <svg class="line-chart" viewBox="0 0 560 220" preserveAspectRatio="none" role="img" aria-label="Home visit revenue and visit count trend over the last 7 months">
+                            <g class="line-chart-grid">
+                                <line x1="0" y1="10" x2="560" y2="10"></line>
+                                <line x1="0" y1="62" x2="560" y2="62"></line>
+                                <line x1="0" y1="114" x2="560" y2="114"></line>
+                                <line x1="0" y1="166" x2="560" y2="166"></line>
+                                <line x1="0" y1="200" x2="560" y2="200"></line>
+                            </g>
+                            <polygon class="line-chart-area" points="0,150 93,132 186,158 280,100 373,118 466,68 560,30 560,200 0,200"></polygon>
+                            <polyline class="line-chart-path line-chart-path-revenue" points="0,150 93,132 186,158 280,100 373,118 466,68 560,30"></polyline>
+                            <polyline class="line-chart-path line-chart-path-orders" points="0,180 93,172 186,182 280,156 373,162 466,138 560,112"></polyline>
+                            <g class="line-chart-dots"><circle cx="560" cy="30" r="5"></circle></g>
+                        </svg>
+                        <div class="line-chart-labels">
+                            <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head"><h2>Visit status split</h2></div>
+                    <div class="donut-wrap">
+                        <div class="donut-chart" style="--p1:58; --p2:24; --p3:18;">
+                            <div class="donut-center"><strong>27</strong><span>visits today</span></div>
+                        </div>
+                        <ul class="legend-list donut-legend">
+                            <li><span class="legend-dot" style="--c:var(--primary)"></span> Completed <strong>58%</strong></li>
+                            <li><span class="legend-dot" style="--c:var(--secondary)"></span> Scheduled <strong>24%</strong></li>
+                            <li><span class="legend-dot" style="--c:#c99433"></span> Pending confirmation <strong>18%</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2>Today's visits</h2>
+                        <a href="./404.html" class="link-read">Export <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr><th>Visit ID</th><th>Patient</th><th>Care Type</th><th>Caregiver</th><th>Status</th><th></th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#VS-2291</td><td>K. Rajagopal</td><td>Post-Op Home Care — 60 min</td><td>Meera Krishnan</td>
+                                    <td><span class="status status-transit">Scheduled</span></td>
+                                    <td><a href="./404.html" class="link-read">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#VS-2288</td><td>Lakshmi Iyer</td><td>Physiotherapy Session</td><td>Vikram Rao</td>
+                                    <td><span class="status status-delivered">Completed</span></td>
+                                    <td><a href="./404.html" class="link-read">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#VS-2279</td><td>Dr. S. Menon</td><td>Medical Support Visit</td><td>Arjun Menon</td>
+                                    <td><span class="status status-pending">Pending Confirmation</span></td>
+                                    <td><a href="./404.html" class="link-read">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td>#VS-2264</td><td>Suresh Nair</td><td>Companionship Visit — 3 hrs</td><td>Divya Suresh</td>
+                                    <td><span class="status status-transit">Scheduled</span></td>
+                                    <td><a href="./404.html" class="link-read">View</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2>Care team activity</h2>
+                        <a href="./404.html" class="link-read">View all</a>
+                    </div>
+                    <ul class="activity-feed">
+                        <li class="activity-item">
+                            <span class="activity-icon activity-icon-transit"><i class="fa-solid fa-house-medical"></i></span>
+                            <div><p><strong>Suresh Nair</strong> was onboarded as a new patient</p><span class="activity-time">1 hour ago</span></div>
+                        </li>
+                        <li class="activity-item">
+                            <span class="activity-icon activity-icon-delivered"><i class="fa-solid fa-circle-check"></i></span>
+                            <div><p><strong>Lakshmi Iyer's</strong> physiotherapy visit #VS-2288 was completed</p><span class="activity-time">4 hours ago</span></div>
+                        </li>
+                        <li class="activity-item">
+                            <span class="activity-icon activity-icon-pending"><i class="fa-solid fa-star"></i></span>
+                            <div><p><strong>Deepa R.</strong> left 5-star feedback for the home care team</p><span class="activity-time">Yesterday</span></div>
+                        </li>
+                        <li class="activity-item">
+                            <span class="activity-icon activity-icon-transit"><i class="fa-solid fa-file-lines"></i></span>
+                            <div><p><strong>Meera Krishnan</strong> generated the monthly care summary</p><span class="activity-time">Yesterday</span></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PATIENTS ============ -->
+        <section class="dash-section" id="patients">
+            <div class="section-head">
+                <div>
+                    <h1>Patients</h1>
+                    <p class="section-sub">Everyone currently receiving home health care from Stackly.</p>
+                </div>
+                <a href="./404.html" class="btn-primary">Add Patient <i class="fa-solid fa-plus"></i></a>
+            </div>
+
+            <div class="kpi-grid kpi-grid-3">
+                <div class="kpi-card"><span class="kpi-icon"><i class="fa-solid fa-house-medical-circle-check"></i></span><h3>142</h3><p>Active patients</p></div>
+                <div class="kpi-card"><span class="kpi-icon"><i class="fa-solid fa-user-check"></i></span><h3>118</h3><p>On a standing care plan</p></div>
+                <div class="kpi-card"><span class="kpi-icon"><i class="fa-solid fa-user-clock"></i></span><h3>9</h3><p>New this month</p></div>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active">All</button>
+                <button class="filter-tab">Active Care</button>
+                <button class="filter-tab">New This Month</button>
+                <button class="filter-tab">Needs Review</button>
+            </div>
+
+            <div class="panel">
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Name</th><th>Contact</th><th>Care Plan</th><th>Status</th><th></th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td>K. Rajagopal</td><td>rajagopal@family.stackly.example</td>
+                                <td><span class="role-badge role-admin">Post-Op Home Care</span></td>
+                                <td><span class="status status-delivered">Active</span></td>
+                                <td><a href="./404.html" class="link-read">Manage</a></td>
+                            </tr>
+                            <tr>
+                                <td>Lakshmi Iyer</td><td>lakshmi@family.stackly.example</td>
+                                <td><span class="role-badge role-customer">Physiotherapy Plan</span></td>
+                                <td><span class="status status-delivered">Active</span></td>
+                                <td><a href="./404.html" class="link-read">Manage</a></td>
+                            </tr>
+                            <tr>
+                                <td>Dr. S. Menon</td><td>menon@family.stackly.example</td>
+                                <td><span class="role-badge role-customer">Medical Support</span></td>
+                                <td><span class="status status-pending">Needs Review</span></td>
+                                <td><a href="./404.html" class="link-read">Manage</a></td>
+                            </tr>
+                            <tr>
+                                <td>Suresh Nair</td><td>suresh@family.stackly.example</td>
+                                <td><span class="role-badge role-customer">Companionship</span></td>
+                                <td><span class="status status-delivered">Active</span></td>
+                                <td><a href="./404.html" class="link-read">Manage</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CAREGIVERS ============ -->
+        <section class="dash-section" id="caregivers">
+            <div class="section-head">
+                <div>
+                    <h1>Caregivers</h1>
+                    <p class="section-sub">Manage caregiver roles, specialities and shift assignments.</p>
+                </div>
+                <a href="./404.html" class="btn-primary">Add Caregiver <i class="fa-solid fa-plus"></i></a>
+            </div>
+
+            <div class="kpi-grid kpi-grid-3">
+                <div class="kpi-card"><span class="kpi-icon"><i class="fa-solid fa-user-nurse"></i></span><h3>50</h3><p>Total caregivers</p></div>
+                <div class="kpi-card"><span class="kpi-icon"><i class="fa-solid fa-sitemap"></i></span><h3>5</h3><p>Care specialities</p></div>
+                <div class="kpi-card"><span class="kpi-icon"><i class="fa-solid fa-user-clock"></i></span><h3>4</h3><p>Open shifts</p></div>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active">All</button>
+                <button class="filter-tab">Nursing</button>
+                <button class="filter-tab">Physiotherapy</button>
+                <button class="filter-tab">Companionship</button>
+            </div>
+
+            <div class="team-dash-grid">
+                <div class="team-dash-card"><div class="team-dash-avatar">AM</div><h3>Arjun Menon</h3><p>Geriatric Physician</p><a href="./404.html" class="link-read">View profile</a></div>
+                <div class="team-dash-card"><div class="team-dash-avatar">MK</div><h3>Meera Krishnan</h3><p>Head Home Care Nurse</p><a href="./404.html" class="link-read">View profile</a></div>
+                <div class="team-dash-card"><div class="team-dash-avatar">VR</div><h3>Vikram Rao</h3><p>Home Physiotherapist</p><a href="./404.html" class="link-read">View profile</a></div>
+                <div class="team-dash-card"><div class="team-dash-avatar">DS</div><h3>Divya Suresh</h3><p>Home Care Coordinator</p><a href="./404.html" class="link-read">View profile</a></div>
+                <div class="team-dash-card"><div class="team-dash-avatar">RN</div><h3>Ravi Nambiar</h3><p>Occupational Therapist</p><a href="./404.html" class="link-read">View profile</a></div>
+                <div class="team-dash-card"><div class="team-dash-avatar">SK</div><h3>Sangeetha Kumar</h3><p>Personal Care Aide</p><a href="./404.html" class="link-read">View profile</a></div>
+            </div>
+        </section>
+
+        <!-- ============ VISITS & SCHEDULE ============ -->
+        <section class="dash-section" id="visits">
+            <div class="section-head">
+                <div>
+                    <h1>Visits &amp; Schedule</h1>
+                    <p class="section-sub">All home visits, appointments and check-ins across active patients.</p>
+                </div>
+                <a href="./404.html" class="btn-primary">New Visit <i class="fa-solid fa-plus"></i></a>
+            </div>
+
+            <div class="kpi-grid kpi-grid-3">
+                <div class="kpi-card"><span class="kpi-icon"><i class="fa-solid fa-hourglass-half"></i></span><h3>6</h3><p>Pending Confirmation</p></div>
+                <div class="kpi-card"><span class="kpi-icon"><i class="fa-solid fa-calendar-check"></i></span><h3>21</h3><p>Scheduled This Week</p></div>
+                <div class="kpi-card"><span class="kpi-icon"><i class="fa-solid fa-circle-check"></i></span><h3>318</h3><p>Completed Visits this year</p></div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">
+                    <h2>All visits</h2>
+                    <a href="./404.html" class="link-read">Filter <i class="fa-solid fa-sliders"></i></a>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Visit ID</th><th>Patient</th><th>Care Type</th><th>Amount</th><th>Payment</th><th>Status</th><th></th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td>#VS-2291</td><td>K. Rajagopal</td><td>Post-Op Home Care</td><td>$180</td>
+                                <td><span class="status status-delivered">Paid</span></td>
+                                <td><span class="status status-transit">Scheduled</span></td>
+                                <td><a href="./404.html" class="link-read">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>#VS-2288</td><td>Lakshmi Iyer</td><td>Physiotherapy Session</td><td>$120</td>
+                                <td><span class="status status-delivered">Paid</span></td>
+                                <td><span class="status status-delivered">Completed</span></td>
+                                <td><a href="./404.html" class="link-read">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>#VS-2279</td><td>Dr. S. Menon</td><td>Medical Support Visit</td><td>$95</td>
+                                <td><span class="status status-pending">Deposit Due</span></td>
+                                <td><span class="status status-pending">Pending Confirmation</span></td>
+                                <td><a href="./404.html" class="link-read">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>#VS-2264</td><td>Suresh Nair</td><td>Companionship Visit</td><td>$85</td>
+                                <td><span class="status status-delivered">Paid</span></td>
+                                <td><span class="status status-transit">Scheduled</span></td>
+                                <td><a href="./404.html" class="link-read">View</a></td>
+                            </tr>
+                            <tr>
+                                <td>#VS-2251</td><td>Kavitha P.</td><td>Memory Care Check-in</td><td>$110</td>
+                                <td><span class="status status-delivered">Paid</span></td>
+                                <td><span class="status status-delivered">Completed</span></td>
+                                <td><a href="./404.html" class="link-read">View</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CARE PLANS & SERVICES ============ -->
+        <section class="dash-section" id="careplans">
+            <div class="section-head">
+                <div>
+                    <h1>Care Plans &amp; Services</h1>
+                    <p class="section-sub">Manage Stackly's home health services and how they're performing.</p>
+                </div>
+                <a href="./404.html" class="btn-primary">Add Service <i class="fa-solid fa-plus"></i></a>
+            </div>
+
+            <div class="kpi-grid kpi-grid-3">
+                <div class="kpi-card"><span class="kpi-icon"><i class="fa-solid fa-notes-medical"></i></span><h3>6</h3><p>Service &amp; plan types</p></div>
+                <div class="kpi-card"><span class="kpi-icon"><i class="fa-solid fa-circle-check"></i></span><h3>27</h3><p>Visits scheduled today</p></div>
+                <div class="kpi-card"><span class="kpi-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><h3>6</h3><p>Pending confirmations</p></div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">
+                    <h2>Most requested services this month</h2>
+                    <a href="./404.html" class="link-read">View all</a>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Service</th><th>Care Team</th><th>Avg. Visit Length</th><th>Visits Completed</th><th>Revenue Generated</th><th></th></tr></thead>
+                        <tbody>
+                            <tr><td>Post-Op Home Care</td><td>Nursing</td><td>60 min</td><td>84</td><td>$15,120</td><td><a href="./404.html" class="link-read">Edit</a></td></tr>
+                            <tr><td>Physiotherapy Session</td><td>Physiotherapy</td><td>45 min</td><td>61</td><td>$7,320</td><td><a href="./404.html" class="link-read">Edit</a></td></tr>
+                            <tr><td>Companionship Visit</td><td>Personal Care</td><td>3 hrs</td><td>77</td><td>$6,545</td><td><a href="./404.html" class="link-read">Edit</a></td></tr>
+                            <tr><td>Memory Care Check-in</td><td>Memory Care</td><td>90 min</td><td>36</td><td>$3,960</td><td><a href="./404.html" class="link-read">Edit</a></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ ANALYTICS ============ -->
+        <section class="dash-section" id="analytics">
+            <div class="section-head">
+                <div>
+                    <h1>Analytics</h1>
+                    <p class="section-sub">Care performance across revenue, visit volume and family satisfaction.</p>
+                </div>
+                <a href="./404.html" class="btn-primary">Export Report <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+            </div>
+
+            <div class="content-grid">
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2>Revenue &amp; visits per month</h2>
+                        <a href="./404.html" class="link-read">Last 6 months</a>
+                    </div>
+                    <div class="bar-chart">
+                        <div class="bar-col"><span class="bar" style="--h:44%"></span><label>Feb</label></div>
+                        <div class="bar-col"><span class="bar" style="--h:58%"></span><label>Mar</label></div>
+                        <div class="bar-col"><span class="bar" style="--h:39%"></span><label>Apr</label></div>
+                        <div class="bar-col"><span class="bar" style="--h:71%"></span><label>May</label></div>
+                        <div class="bar-col"><span class="bar" style="--h:55%"></span><label>Jun</label></div>
+                        <div class="bar-col"><span class="bar bar-current" style="--h:91%"></span><label>Jul</label></div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head"><h2>Revenue by service type</h2></div>
+                    <ul class="legend-list">
+                        <li><span class="legend-dot" style="--c:var(--primary)"></span> Post-Op &amp; Nursing <strong>44%</strong></li>
+                        <li><span class="legend-dot" style="--c:var(--secondary)"></span> Physiotherapy <strong>21%</strong></li>
+                        <li><span class="legend-dot" style="--c:#c99433"></span> Companionship <strong>20%</strong></li>
+                        <li><span class="legend-dot" style="--c:var(--ink-faint)"></span> Memory Care <strong>15%</strong></li>
+                    </ul>
+                    <div class="legend-bar">
+                        <span style="--w:44%; --c:var(--primary)"></span>
+                        <span style="--w:21%; --c:var(--secondary)"></span>
+                        <span style="--w:20%; --c:#c99433"></span>
+                        <span style="--w:15%; --c:var(--ink-faint)"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ REPORTS ============ -->
+        <section class="dash-section" id="reports">
+            <div class="section-head">
+                <div>
+                    <h1>Reports</h1>
+                    <p class="section-sub">Generate and download home health care performance reports.</p>
+                </div>
+                <a href="./404.html" class="btn-primary">New Report <i class="fa-solid fa-plus"></i></a>
+            </div>
+            <div class="panel">
+                <div class="panel-head"><h2>Generated reports</h2></div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Report</th><th>Type</th><th>Generated</th><th>Size</th><th></th></tr></thead>
+                        <tbody>
+                            <tr><td>Monthly Visit Summary — June</td><td>Performance</td><td>Jul 01, 2026</td><td>1.2 MB</td><td><a href="./404.html" class="link-read">Download</a></td></tr>
+                            <tr><td>Revenue Summary — Q2</td><td>Finance</td><td>Jun 30, 2026</td><td>860 KB</td><td><a href="./404.html" class="link-read">Download</a></td></tr>
+                            <tr><td>Family Satisfaction Report</td><td>Community</td><td>Jun 22, 2026</td><td>710 KB</td><td><a href="./404.html" class="link-read">Download</a></td></tr>
+                            <tr><td>Caregiver Utilization — May</td><td>Analytics</td><td>Jun 01, 2026</td><td>490 KB</td><td><a href="./404.html" class="link-read">Download</a></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SETTINGS ============ -->
+        <section class="dash-section" id="settings">
+            <div class="section-head">
+                <div>
+                    <h1>Settings</h1>
+                    <p class="section-sub">Admin configuration and notification preferences.</p>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="panel">
+                    <div class="panel-head"><h2>Profile</h2></div>
+                    <form class="settings-form" id="settingsForm">
+                        <div class="form-grid">
+                            <div class="field"><label for="sName">Full name</label><input type="text" id="sName" value="" /></div>
+                            <div class="field"><label for="sEmail">Email</label><input type="email" id="sEmail" value="" /></div>
+                            <div class="field"><label for="sPhone">Phone</label><input type="tel" id="sPhone" placeholder="Add phone number" /></div>
+                            <div class="field"><label for="sRole">Role</label><input type="text" id="sRole" value="Admin — Care Coordinator" disabled /></div>
+                        </div>
+                        <button type="submit" class="btn-primary">Save changes <i class="fa-solid fa-check"></i></button>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head"><h2>Care alert preferences</h2></div>
+                    <div class="toggle-row">
+                        <div><p class="toggle-title">New visit requests</p><p class="toggle-sub">Email when a family submits a new visit request</p></div>
+                        <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div><p class="toggle-title">Caregiver check-in alerts</p><p class="toggle-sub">Notify when a caregiver checks in or out of a visit</p></div>
+                        <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+                    </div>
+                    <div class="toggle-row">
+                        <div><p class="toggle-title">Weekly care digest</p><p class="toggle-sub">Summary of visits, revenue and patient activity</p></div>
+                        <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebarClose = document.getElementById('sidebarClose');
+  const navLinks = document.querySelectorAll('.nav-link[data-section]');
+  const sections = document.querySelectorAll('.dash-section');
+
+  const openSidebar = () => { sidebar.classList.add('open'); overlay.classList.add('show'); };
+  const closeSidebar = () => { sidebar.classList.remove('open'); overlay.classList.remove('show'); };
+  menuToggle?.addEventListener('click', openSidebar);
+  sidebarClose?.addEventListener('click', closeSidebar);
+  overlay?.addEventListener('click', closeSidebar);
+
+  const showSection = (id) => {
+    sections.forEach(sec => sec.classList.toggle('active', sec.id === id));
+    navLinks.forEach(link => link.classList.toggle('active', link.dataset.section === id));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = link.dataset.section;
+      showSection(id);
+      history.replaceState(null, '', `#${id}`);
+      closeSidebar();
+    });
+  });
+
+  const initialId = window.location.hash.replace('#', '');
+  const validIds = Array.from(sections).map(s => s.id);
+  showSection(validIds.includes(initialId) ? initialId : 'overview');
+
+  document.querySelectorAll('.filter-tabs').forEach(group => {
+    group.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        group.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+  });
+
+  const notifBtn = document.getElementById('notifBtn');
+  notifBtn?.addEventListener('click', () => { /* reserved for a future notifications panel */ });
+
+  const settingsForm = document.getElementById('settingsForm');
+  settingsForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = settingsForm.querySelector('button[type="submit"]');
+    const original = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Saved!';
+    window.setTimeout(() => { btn.innerHTML = original; }, 2000);
+  });
+
+  const dashboardEmail = document.getElementById('dashboardEmail');
+  const userEmail = localStorage.getItem('stacklyUserEmail');
+  if (dashboardEmail && userEmail) { dashboardEmail.textContent = userEmail; }
+});
+</script>
+</body>
+</html>

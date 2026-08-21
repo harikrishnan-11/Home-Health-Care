@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Stackly Home Health Care</title>
+<meta name="description" content="This page took a wrong turn. Let's walk you back to Stackly home health care.">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="404-style.css">
+<style>
+    /* ==========================================================================
+   Stackly — 404 Page
+   Palette: deep sage (trust/calm) + warm amber (hope/warmth) on soft cream
+   ========================================================================== */
+
+:root{
+    --primary:        #3F6F5E;
+    --primary-dark:   #2C4F42;
+    --primary-light:  #E8F0EC;
+    --secondary:      #E3A33D;
+    --secondary-dark: #C4832A;
+    --cream:          #FBF8F1;
+    --white:          #FFFFFF;
+    --ink:            #1F2C25;
+    --muted:          #62766B;
+    --line:           #DCE5DE;
+
+    --font-display: 'Poppins', sans-serif;
+    --font-mono:    'Space Mono', monospace;
+
+    --ease: cubic-bezier(.22,1,.36,1);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-display);
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 12% 8%, #EFF6F1 0%, transparent 45%),
+        radial-gradient(circle at 88% 92%, #FBEEDA 0%, transparent 50%),
+        var(--cream);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+a{ text-decoration: none; color: inherit; }
+button{ font-family: inherit; }
+
+/* subtle paper grain so the flat colour field doesn't feel too flat */
+.grain{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: .5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* ---------------------------------- nav ---------------------------------- */
+
+.mini-nav{
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 6vw 0;
+}
+
+.logo{ display: inline-flex; align-items: center; gap: 10px; }
+.logo-mark{ width: 34px; height: 34px; display: inline-flex; }
+.logo-mark svg{ width: 100%; height: 100%; }
+.logo-text{
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--primary-dark);
+}
+
+.mini-nav-cta{
+    font-size: .85rem;
+    font-weight: 600;
+    padding: 10px 18px;
+    border: 1.5px solid var(--primary);
+    border-radius: 999px;
+    color: var(--primary-dark);
+    transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+}
+.mini-nav-cta:hover{
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* -------------------------------- ambient -------------------------------- */
+
+.ambient{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+.leaf{
+    position: absolute;
+    color: var(--primary);
+    opacity: .16;
+    font-size: 2.4rem;
+    animation: drift 14s ease-in-out infinite;
+}
+.leaf i{ display:block; }
+.leaf-1{ top: 14%; left: 8%;  animation-delay: 0s;   color: var(--primary); }
+.leaf-2{ top: 68%; left: 14%; animation-delay: 2.4s; color: var(--secondary); font-size: 1.6rem; }
+.leaf-3{ top: 22%; left: 88%; animation-delay: 1.1s; color: var(--primary); font-size: 2rem; }
+.leaf-4{ top: 78%; left: 84%; animation-delay: 3.6s; color: var(--secondary-dark); font-size: 1.8rem; }
+.leaf-5{ top: 46%; left: 94%; animation-delay: 5s;   color: var(--primary); font-size: 1.5rem; }
+
+@keyframes drift{
+    0%, 100%   { transform: translateY(0) rotate(0deg); }
+    50%        { transform: translateY(-22px) rotate(8deg); }
+}
+
+/* --------------------------------- hero ---------------------------------- */
+
+.error-shell{
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 6vw 60px;
+}
+
+.error-hero{
+    max-width: 720px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eyebrow{
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--secondary-dark);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 18px;
+}
+.eyebrow-dot{
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--secondary);
+    box-shadow: 0 0 0 4px rgba(227,163,61,.22);
+    animation: blink 1.8s ease-in-out infinite;
+}
+@keyframes blink{
+    0%, 100%{ opacity: 1; }
+    50%{ opacity: .35; }
+}
+
+/* -------------------------- 404 / pulse signature ------------------------- */
+
+.pulse-wrap{ margin-bottom: 6px; }
+
+.pulse-number{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(4px, 1.4vw, 14px);
+    margin: 0;
+    line-height: .8;
+}
+.digit{
+    font-weight: 800;
+    font-size: clamp(4.4rem, 16vw, 8.5rem);
+    letter-spacing: -0.03em;
+    color: var(--primary-dark);
+}
+.digit-pulse{
+    width: clamp(4.6rem, 17vw, 9rem);
+    height: clamp(4.6rem, 17vw, 9rem);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.pulse-line{ width: 100%; height: 100%; overflow: visible; }
+.pulse-ring{
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 4;
+    opacity: .18;
+}
+.pulse-trace{
+    fill: none;
+    stroke: var(--secondary);
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 340;
+    stroke-dashoffset: 340;
+    animation:
+        draw-trace 1.6s var(--ease) .3s forwards,
+        pulse-glow 2.6s ease-in-out 2s infinite;
+}
+@keyframes draw-trace{
+    to{ stroke-dashoffset: 0; }
+}
+@keyframes pulse-glow{
+    0%, 100%{ opacity: 1; filter: drop-shadow(0 0 0 rgba(227,163,61,0)); }
+    50%{ opacity: .75; filter: drop-shadow(0 0 6px rgba(227,163,61,.5)); }
+}
+
+.error-title{
+    font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+    font-weight: 700;
+    color: var(--ink);
+    margin: 10px 0 12px;
+    letter-spacing: -0.01em;
+}
+.error-copy{
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 0 30px;
+}
+
+/* --------------------------------- buttons -------------------------------- */
+
+.error-actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 46px;
+}
+.btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 600;
+    font-size: .95rem;
+    padding: 14px 26px;
+    border-radius: 999px;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease), color .25s var(--ease);
+}
+.btn-primary{
+    background: var(--primary);
+    color: var(--white);
+    box-shadow: 0 10px 24px -10px rgba(44,79,66,.55);
+}
+.btn-primary:hover{
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 30px -12px rgba(44,79,66,.6);
+}
+.btn-secondary{
+    background: transparent;
+    color: var(--primary-dark);
+    border-color: var(--line);
+}
+.btn-secondary:hover{
+    border-color: var(--secondary);
+    color: var(--secondary-dark);
+    transform: translateY(-3px);
+}
+.btn:focus-visible{
+    outline: 3px solid var(--secondary);
+    outline-offset: 3px;
+}
+
+/* --------------------------------- route ---------------------------------- */
+
+.route-track{
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    height: 90px;
+    margin-bottom: 40px;
+}
+.route-svg{
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+.route-dashes{
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 2 14;
+}
+.route-pin{
+    position: absolute;
+    top: 0; left: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    background: var(--secondary);
+    border-radius: 50% 50% 50% 0;
+    transform: translate(-50%, -60%) rotate(45deg);
+    box-shadow: 0 6px 14px -4px rgba(196,131,42,.6);
+    offset-path: path("M10,90 C 150,10 250,110 400,60 S 650,10 890,70");
+    offset-rotate: 0deg;
+    animation: walk-route 7s ease-in-out infinite;
+}
+.route-pin i{ transform: rotate(-45deg); font-size: .85rem; }
+@keyframes walk-route{
+    0%   { offset-distance: 0%; }
+    50%  { offset-distance: 100%; }
+    100% { offset-distance: 0%; }
+}
+.route-flag{
+    position: absolute;
+    bottom: -6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    letter-spacing: .04em;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+.route-start{ left: 0; }
+.route-end{ right: 0; color: var(--primary-dark); }
+.route-start i{ font-size: .4rem; color: var(--secondary); }
+.route-end i{ font-size: .8rem; color: var(--primary); }
+
+/* ------------------------------ quick links -------------------------------- */
+
+.quick-links{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    font-size: .88rem;
+    color: var(--muted);
+}
+.quick-links a{
+    padding: 4px 2px;
+    border-bottom: 1.5px solid transparent;
+    transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.quick-links a:hover{
+    color: var(--primary-dark);
+    border-color: var(--secondary);
+}
+
+/* --------------------------------- footer ---------------------------------- */
+
+.mini-footer{
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 20px 6vw 30px;
+    font-size: .8rem;
+    color: var(--muted);
+}
+
+/* ------------------------------ reveal-on-load ------------------------------ */
+
+.reveal{
+    opacity: 0;
+    transform: translateY(18px);
+    animation: reveal-up .8s var(--ease) forwards;
+}
+.mini-nav.reveal{ animation-delay: 0s; }
+.eyebrow.reveal{ animation-delay: .05s; }
+.pulse-wrap.reveal{ animation-delay: .12s; }
+.error-title.reveal{ animation-delay: .3s; }
+.error-copy.reveal{ animation-delay: .4s; }
+.error-actions.reveal{ animation-delay: .5s; }
+.route-track.reveal{ animation-delay: .62s; }
+.quick-links.reveal{ animation-delay: .72s; }
+
+@keyframes reveal-up{
+    to{ opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------------------------
+   Responsive
+--------------------------------------------------------------------------- */
+
+@media (max-width: 720px){
+    .mini-nav{ padding: 20px 6vw 0; }
+    .mini-nav-cta{ display: none; }
+    .error-shell{ padding: 24px 6vw 44px; }
+    .error-copy{ font-size: .94rem; }
+    .route-track{ height: 76px; }
+}
+
+@media (max-width: 480px){
+    .digit{ font-size: clamp(3.4rem, 20vw, 5rem); }
+    .digit-pulse{ width: clamp(3.6rem, 21vw, 5.2rem); height: clamp(3.6rem, 21vw, 5.2rem); }
+    .error-actions{ flex-direction: column; width: 100%; }
+    .btn{ width: 100%; justify-content: center; }
+    .quick-links{ font-size: .8rem; row-gap: 6px; }
+    .route-track{ height: 64px; margin-bottom: 30px; }
+    .logo-text{ font-size: 1.1rem; }
+}
+
+/* ------------------------------ reduced motion ------------------------------ */
+
+@media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    .leaf, .eyebrow-dot, .pulse-trace, .route-pin, .reveal{
+        animation: none !important;
+    }
+    .reveal{ opacity: 1; transform: none; }
+    .pulse-trace{ stroke-dashoffset: 0; }
+    .route-pin{ offset-distance: 0%; left: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- FLOATING AMBIENT SHAPES -->
+<div class="ambient" aria-hidden="true">
+    <span class="leaf leaf-1"><i class="fa-solid fa-leaf"></i></span>
+    <span class="leaf leaf-2"><i class="fa-solid fa-heart"></i></span>
+    <span class="leaf leaf-3"><i class="fa-solid fa-leaf"></i></span>
+    <span class="leaf leaf-4"><i class="fa-solid fa-mortar-pestle"></i></span>
+    <span class="leaf leaf-5"><i class="fa-solid fa-house"></i></span>
+</div>
+
+<header class="mini-nav reveal">
+    <a href="index.html" class="logo" aria-label="Stackly home">
+        <span class="logo-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+                <path d="M24 40C24 40 6 29.5 6 17.5C6 11.7 10.6 7 16.3 7C19.6 7 22.4 8.6 24 11C25.6 8.6 28.4 7 31.7 7C37.4 7 42 11.7 42 17.5C42 29.5 24 40 24 40Z" fill="var(--primary)"/>
+                <path d="M17 22C17 22 20 17 24 22C28 17 31 22 31 22" stroke="var(--secondary)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </span>
+        <span class="logo-text">Stackly</span>
+    </a>
+    <a href="contact.html" class="mini-nav-cta">Talk To A Coordinator</a>
+</header>
+
+<main class="error-shell">
+
+    <section class="error-hero">
+
+        <p class="eyebrow reveal"><span class="eyebrow-dot"></span> Error 404 &mdash; Off The Usual Route</p>
+
+        <div class="pulse-wrap reveal">
+            <h1 class="pulse-number" aria-label="404">
+                <span class="digit">4</span>
+                <span class="digit digit-pulse">
+                    <svg class="pulse-line" viewBox="0 0 120 120" aria-hidden="true">
+                        <circle class="pulse-ring" cx="60" cy="60" r="52"></circle>
+                        <polyline class="pulse-trace" points="10,62 38,62 46,40 56,82 66,30 74,62 110,62"></polyline>
+                    </svg>
+                </span>
+                <span class="digit">4</span>
+            </h1>
+        </div>
+
+        <h2 class="error-title reveal">This page must have stepped out on a home visit</h2>
+        <p class="error-copy reveal">The link you followed doesn't lead anywhere we currently look after. It may have moved, or the address wasn't quite right &mdash; either way, let's get you back on a route we actually cover.</p>
+
+        <div class="error-actions reveal">
+            <a href="index.html" class="btn btn-primary"><i class="fa-solid fa-house"></i> Take Me Home</a>
+            <a href="contact.html" class="btn btn-secondary"><i class="fa-solid fa-phone"></i> Contact A Coordinator</a>
+        </div>
+
+        <!-- WALKING PATH SIGNATURE -->
+        <div class="route-track reveal" aria-hidden="true">
+            <svg class="route-svg" viewBox="0 0 900 120" preserveAspectRatio="none">
+                <path id="routePath" class="route-dashes" d="M10,90 C 150,10 250,110 400,60 S 650,10 890,70"></path>
+            </svg>
+            <div class="route-pin"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="route-flag route-start"><i class="fa-solid fa-circle"></i><span>You are here</span></div>
+            <div class="route-flag route-end"><i class="fa-solid fa-house"></i><span>Stackly Home</span></div>
+        </div>
+
+        <nav class="quick-links reveal" aria-label="Quick links">
+            <a href="index.html">Home</a>
+            <span aria-hidden="true">&middot;</span>
+            <a href="services.html">Services</a>
+            <span aria-hidden="true">&middot;</span>
+            <a href="our-story.html">Our Story</a>
+            <span aria-hidden="true">&middot;</span>
+            <a href="journal.html">Journal</a>
+            <span aria-hidden="true">&middot;</span>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+    </section>
+
+</main>
+
+<footer class="mini-footer">
+    <p>&copy; <span id="year"></span> Stackly Home Health Care &middot; 000 - 123 - 456789</p>
+</footer>
+
+<script>
+    (function () {
+  "use strict";
+
+  var yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Re-trigger the CSS reveal-on-load animations cleanly even if the
+     browser fires them before styles are fully painted (fixes odd
+     iOS Safari race conditions where the first paint skips opacity 0). */
+  document.querySelectorAll(".reveal").forEach(function (el, i) {
+    el.style.animationPlayState = "running";
+  });
+
+  if (reduceMotion) return;
+
+  /* Gentle pointer-driven parallax on the floating ambient icons.
+     Skipped entirely on touch-only devices and when reduced motion
+     is requested, so it never fights with scrolling on mobile. */
+  var isTouchOnly = window.matchMedia("(hover: none)").matches;
+  if (isTouchOnly) return;
+
+  var leaves = document.querySelectorAll(".leaf");
+  if (!leaves.length) return;
+
+  var targetX = 0, targetY = 0, curX = 0, curY = 0;
+  var raf = null;
+
+  window.addEventListener("mousemove", function (e) {
+    var w = window.innerWidth, h = window.innerHeight;
+    targetX = (e.clientX / w - 0.5) * 2;
+    targetY = (e.clientY / h - 0.5) * 2;
+    if (!raf) raf = requestAnimationFrame(tick);
+  });
+
+  function tick() {
+    curX += (targetX - curX) * 0.06;
+    curY += (targetY - curY) * 0.06;
+
+    leaves.forEach(function (leaf, i) {
+      var depth = 6 + (i % 3) * 4; // varying parallax strength per icon
+      var x = curX * depth;
+      var y = curY * depth;
+      leaf.style.transform = "translate(" + x.toFixed(2) + "px," + y.toFixed(2) + "px)";
+    });
+
+    if (Math.abs(targetX - curX) > 0.001 || Math.abs(targetY - curY) > 0.001) {
+      raf = requestAnimationFrame(tick);
+    } else {
+      raf = null;
+    }
+  }
+})();
+</script>
+</body>
+</html>

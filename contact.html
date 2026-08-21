@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Stackly Home Health Care</title>
+<meta name="description" content="Get in touch with Stackly for a free consultation about home health care for your loved one.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="pages.css">
+</head>
+<body>
+
+<header class="top-bar">
+    <div class="top-bar-left">
+        <p><i class="fa-solid fa-location-dot"></i> 12 Race Course Rd, Coimbatore, TN 641018</p>
+        <p><i class="fa-solid fa-phone-volume"></i> 000 - 123 - 456789</p>
+    </div>
+    <div class="top-bar-right">
+        <p><i class="fa-regular fa-clock"></i> Mon to Sat, 9:00 AM – 8:00 PM</p>
+        <div class="social">
+            <a href="./404.html" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="./404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="./404.html" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="./404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </div>
+</header>
+
+<nav id="site-nav">
+<a href="index.html" class="logo">
+              <img src="./src/logo/Untitled design (7).webp" alt="">
+            </a>
+
+   <div class="nav-links" id="nav-links">
+        <a href="index.html" class="active-link">Home</a>
+        <a href="our-story.html">Our Story</a>
+        <a href="services.html">Services</a>
+        <a href="journal.html">Journal</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="mobile-cta">Login</a>
+    </div>
+
+    <a href="./login.html" class="nav-cta"><button>Login</button></a>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="nav-scrim" id="nav-scrim"></div>
+
+<main id="top">
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="page-hero-inner reveal">
+            <div class="breadcrumb"><a href="index.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:0.6rem;"></i> <span>Contact</span></div>
+            <p class="eyebrow eyebrow-light">Get In Touch</p>
+            <h1>Let's find the right home health care plan together</h1>
+            <p class="section-sub">A home care coordinator will call you back the same day — no obligation, no pressure.</p>
+        </div>
+    </section>
+
+    <!-- INFO CARDS -->
+    <section class="contact-info-row">
+        <div class="info-card reveal">
+            <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div><h4>Visit Us</h4><p>12 Race Course Rd, Coimbatore, TN 641018</p></div>
+        </div>
+        <div class="info-card reveal">
+            <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+            <div><h4>Call Us</h4><p>000 - 123 - 456789<br>Mon–Sat, 9:00 AM – 8:00 PM</p></div>
+        </div>
+        <div class="info-card reveal">
+            <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div><h4>Email Us</h4><p>care@Stackly.example<br>We reply within one business day</p></div>
+        </div>
+    </section>
+
+    <!-- FORM + MAP -->
+    <section class="contact-main">
+        <div class="contact-form-panel reveal">
+            <p class="eyebrow">Send A Message</p>
+            <h2>Tell us about your family</h2>
+            <p class="section-sub" style="margin-bottom:30px;">Share a little context and a home care coordinator will follow up personally.</p>
+            <form class="contact-form" id="contact-form-full" data-success-message="Thanks — a home care coordinator will call you back today." novalidate>
+                <div class="form-row">
+                    <div class="field"><input type="text" placeholder=" " required id="c-name"><label for="c-name">Full Name*</label></div>
+                    <div class="field"><input type="tel" placeholder=" " required id="c-phone"><label for="c-phone">Phone Number*</label></div>
+                </div>
+                <div class="field"><input type="email" placeholder=" " required id="c-email"><label for="c-email">Email Address*</label></div>
+                <div class="field select-field">
+                    <select id="c-need" required>
+                        <option value="" disabled selected hidden></option>
+                        <option>Home Visit Care</option>
+                        <option>In-Home Nursing Care</option>
+                        <option>Medical Support</option>
+                        <option>Not sure yet</option>
+                    </select>
+                    <label for="c-need">Select Option</label>
+                </div>
+                <div class="field"><input type="text" placeholder=" " id="c-msg"><label for="c-msg">Additional Message</label></div>
+                <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                <div class="form-status"></div>
+            </form>
+        </div>
+
+        <div class="contact-map-panel reveal">
+            <div class="map-pin"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="map-card">
+                <h3>Home Health Care — Coimbatore</h3>
+                <p><i class="fa-solid fa-location-dot"></i> 12 Race Course Rd, Coimbatore, TN 641018</p>
+                <p><i class="fa-solid fa-envelope"></i> care@Stackly.example &nbsp; / &nbsp; <i class="fa-solid fa-phone"></i> 000 123 4567</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="faq-head reveal">
+            <p class="eyebrow">Common Questions</p>
+            <h2>Frequently Asked Questions</h2>
+            <p class="section-sub">Still have a question? Call us at 000 - 123 - 456789.</p>
+        </div>
+        <div class="faq-list reveal">
+            <div class="faq-item">
+                <button class="faq-question">How quickly can home care start? <i class="fa-solid fa-plus"></i></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Most families meet their home care coordinator within 2–3 days of the first call, and visits can often begin the same week depending on the level of care needed.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Do you offer overnight or 24-hour home care? <i class="fa-solid fa-plus"></i></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes. Alongside scheduled daily visits, we offer overnight and round-the-clock caregiver placements at home for seniors who need continuous support.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Can home care plans change over time? <i class="fa-solid fa-plus"></i></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Coordinators review every plan regularly and adjust the mix of medical, personal and recreational support as your loved one's needs change, all delivered at home.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Which cities do you currently serve? <i class="fa-solid fa-plus"></i></button>
+                <div class="faq-answer"><div class="faq-answer-inner">We currently operate in Coimbatore, Chennai, Bengaluru, Kochi and Madurai, offering home health care visits in each city.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">How are home health caregivers vetted and trained? <i class="fa-solid fa-plus"></i></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Every caregiver completes background checks plus structured clinical and empathy training before their first home visit, and is reviewed regularly by a coordinator.</div></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-top">
+        <div class="footer-brand">
+ <a href="index.html" class="logo">
+              <img src="./src/logo/Untitled design (7).webp" alt="">
+            </a>
+            <p>Warm, professional home health care across South India — right at home, for every family that needs us.</p>
+            <div class="social footer-social">
+                <a href="./404.html" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="./404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="./404.html" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="./404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Facilities</h4>
+            <a href="our-story.html">About Us</a>
+            <a href="services.html">Our Service</a>
+            <a href="./404.html">Donation</a>
+            <a href="journal.html">Journal</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="footer-col">
+            <h4>Main Branch</h4>
+            <p><i class="fa-solid fa-location-dot"></i> 12 Race Course Rd, Coimbatore, TN 641018</p>
+            <p><i class="fa-solid fa-phone"></i> 000 - 123 - 456789</p>
+            <p><i class="fa-solid fa-envelope"></i> care@Stackly.example</p>
+        </div>
+        <div class="footer-col newsletter-col">
+            <h4>Newsletter</h4>
+            <p>Gentle home care updates, once a month.</p>
+            <form class="newsletter-form" onsubmit="return false;">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Stackly Home Health Care. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="./404.html">Terms &amp; Conditions</a>
+            <a href="./404.html">Privacy Policy</a>
+        </div>
+    </div>
+</footer>
+
+<button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script src="script.js"></script>
+<script src="pages.js"></script>
+</body>
+</html>
