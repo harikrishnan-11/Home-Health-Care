@@ -12,6 +12,37 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="pages.css">
+<style>
+    .field {
+    position: relative;
+    margin-bottom: 22px;
+}
+
+.field.error input,
+.field.error select {
+    border-color: #e53935;
+}
+
+.error-message {
+    display: block;
+    margin-top: 1px;
+    color: #e53935;
+    font-size: 13px;
+}
+
+.form-status {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.form-status.error {
+    color: #e53935;
+}
+
+.form-status.success {
+    color: #198754;
+}
+</style>
 </head>
 <body>
 
@@ -81,76 +112,154 @@
             <div><h4>Email Us</h4><p>care@Stackly.example<br>We reply within one business day</p></div>
         </div>
     </section>
+<!-- FORM + MAP -->
+<section class="contact-main">
 
-    <!-- FORM + MAP -->
-    <section class="contact-main">
-        <div class="contact-form-panel reveal">
-            <p class="eyebrow">Send A Message</p>
-            <h2>Tell us about your family</h2>
-            <p class="section-sub" style="margin-bottom:30px;">Share a little context and a home care coordinator will follow up personally.</p>
-            <form class="contact-form" id="contact-form-full" data-success-message="Thanks — a home care coordinator will call you back today." novalidate>
-                <div class="form-row">
-                    <div class="field"><input type="text" placeholder=" " required id="c-name"><label for="c-name">Full Name*</label></div>
-                    <div class="field"><input type="tel" placeholder=" " required id="c-phone"><label for="c-phone">Phone Number*</label></div>
-                </div>
-                <div class="field"><input type="email" placeholder=" " required id="c-email"><label for="c-email">Email Address*</label></div>
-                <div class="field select-field">
-                    <select id="c-need" required>
-                        <option value="" disabled selected hidden></option>
-                        <option>Home Visit Care</option>
-                        <option>In-Home Nursing Care</option>
-                        <option>Medical Support</option>
-                        <option>Not sure yet</option>
-                    </select>
-                    <label for="c-need">Select Option</label>
-                </div>
-                <div class="field"><input type="text" placeholder=" " id="c-msg"><label for="c-msg">Additional Message</label></div>
-                <button type="submit" class="btn btn-primary btn-block">Send Message</button>
-                <div class="form-status"></div>
-            </form>
-        </div>
+    <!-- CONTACT FORM -->
+    <div class="contact-form-panel reveal">
 
-        <div class="contact-map-panel reveal">
-            <div class="map-pin"><i class="fa-solid fa-location-dot"></i></div>
-            <div class="map-card">
-                <h3>Home Health Care — Coimbatore</h3>
-                <p><i class="fa-solid fa-location-dot"></i> 12 Race Course Rd, Coimbatore, TN 641018</p>
-                <p><i class="fa-solid fa-envelope"></i> care@Stackly.example &nbsp; / &nbsp; <i class="fa-solid fa-phone"></i> 000 123 4567</p>
+        <p class="eyebrow">Send A Message</p>
+
+        <h2>Tell us about your family</h2>
+
+        <p class="section-sub" style="margin-bottom:30px;">
+            Share a little context and a home care coordinator will follow up personally.
+        </p>
+
+        <form
+            class="contact-form"
+            id="contact-form-full"
+            data-success-message="Thanks — a home care coordinator will call you back today."
+            novalidate
+        >
+
+            <div class="form-row">
+
+                <div class="field">
+                    <input
+                        type="text"
+                        placeholder=" "
+                        required
+                        id="c-name"
+                        autocomplete="name"
+                    >
+                    <label for="c-name">Full Name*</label>
+                </div>
+
+                <div class="field">
+                    <input
+                        type="tel"
+                        placeholder=" "
+                        required
+                        id="c-phone"
+                        autocomplete="tel"
+                    >
+                    <label for="c-phone">Phone Number*</label>
+                </div>
+
             </div>
-        </div>
-    </section>
+
+
+            <div class="field">
+
+                <input
+                    type="email"
+                    placeholder=" "
+                    required
+                    id="c-email"
+                    autocomplete="email"
+                >
+
+                <label for="c-email">Email Address*</label>
+
+            </div>
+
+
+            <div class="field select-field">
+
+                <select id="c-need" required>
+
+                    <option value="" disabled selected hidden></option>
+
+                    <option value="Home Visit Care">
+                        Home Visit Care
+                    </option>
+
+                    <option value="In-Home Nursing Care">
+                        In-Home Nursing Care
+                    </option>
+
+                    <option value="Medical Support">
+                        Medical Support
+                    </option>
+
+                    <option value="Not sure yet">
+                        Not sure yet
+                    </option>
+
+                </select>
+
+                <label for="c-need">
+                    Select Option
+                </label>
+
+            </div>
+
+
+            <div class="field">
+
+                <input
+                    type="text"
+                    placeholder=" "
+                    id="c-msg"
+                    maxlength="500"
+                >
+
+                <label for="c-msg">
+                    Additional Message
+                </label>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary btn-block"
+            >
+                Send Message
+            </button>
+
+
+            <div
+                class="form-status"
+                aria-live="polite"
+            ></div>
+
+        </form>
+
+    </div>
+
+
+    <!-- GOOGLE MAP -->
+    <div class="contact-map-panel reveal">
+
+        <iframe
+            title="Stackly Coimbatore Office Location"
+            src="https://www.google.com/maps?q=Stackly,+Iswarya+Complex,+79,+Netaji+Road,+Pappanaickenpalayam,+Coimbatore,+Tamil+Nadu+641037&output=embed"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+
+    </div>
+
+</section>
 
     <!-- FAQ -->
-    <section class="faq-section">
-        <div class="faq-head reveal">
-            <p class="eyebrow">Common Questions</p>
-            <h2>Frequently Asked Questions</h2>
-            <p class="section-sub">Still have a question? Call us at 000 - 123 - 456789.</p>
-        </div>
-        <div class="faq-list reveal">
-            <div class="faq-item">
-                <button class="faq-question">How quickly can home care start? <i class="fa-solid fa-plus"></i></button>
-                <div class="faq-answer"><div class="faq-answer-inner">Most families meet their home care coordinator within 2–3 days of the first call, and visits can often begin the same week depending on the level of care needed.</div></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question">Do you offer overnight or 24-hour home care? <i class="fa-solid fa-plus"></i></button>
-                <div class="faq-answer"><div class="faq-answer-inner">Yes. Alongside scheduled daily visits, we offer overnight and round-the-clock caregiver placements at home for seniors who need continuous support.</div></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question">Can home care plans change over time? <i class="fa-solid fa-plus"></i></button>
-                <div class="faq-answer"><div class="faq-answer-inner">Coordinators review every plan regularly and adjust the mix of medical, personal and recreational support as your loved one's needs change, all delivered at home.</div></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question">Which cities do you currently serve? <i class="fa-solid fa-plus"></i></button>
-                <div class="faq-answer"><div class="faq-answer-inner">We currently operate in Coimbatore, Chennai, Bengaluru, Kochi and Madurai, offering home health care visits in each city.</div></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question">How are home health caregivers vetted and trained? <i class="fa-solid fa-plus"></i></button>
-                <div class="faq-answer"><div class="faq-answer-inner">Every caregiver completes background checks plus structured clinical and empathy training before their first home visit, and is reviewed regularly by a coordinator.</div></div>
-            </div>
-        </div>
-    </section>
-
+  
 </main>
 
 <footer>
@@ -203,5 +312,140 @@
 
 <script src="script.js"></script>
 <script src="pages.js"></script>
+<script>
+    const contactForm = document.getElementById("contact-form-full");
+
+contactForm.addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    const name = document.getElementById("c-name");
+    const phone = document.getElementById("c-phone");
+    const email = document.getElementById("c-email");
+    const need = document.getElementById("c-need");
+    const message = document.getElementById("c-msg");
+    const status = contactForm.querySelector(".form-status");
+
+    // Clear previous errors
+    document.querySelectorAll(".field").forEach(field => {
+        field.classList.remove("error");
+    });
+
+    document.querySelectorAll(".error-message").forEach(error => {
+        error.remove();
+    });
+
+    status.textContent = "";
+    status.className = "form-status";
+
+    let isValid = true;
+
+
+    // ---------- Name ----------
+    const nameValue = name.value.trim();
+
+    if (nameValue === "") {
+
+        showError(name, "Full name is required");
+        isValid = false;
+
+    } else if (nameValue.length < 3) {
+
+        showError(name, "Name must be at least 3 characters");
+        isValid = false;
+
+    } else if (!/^[a-zA-Z\s.'-]+$/.test(nameValue)) {
+
+        showError(name, "Please enter a valid name");
+        isValid = false;
+    }
+
+
+    // ---------- Phone ----------
+    const phoneValue = phone.value.trim();
+
+    if (phoneValue === "") {
+
+        showError(phone, "Phone number is required");
+        isValid = false;
+
+    } else if (!/^[6-9]\d{9}$/.test(phoneValue)) {
+
+        showError(phone, "Enter a valid 10-digit Indian phone number");
+        isValid = false;
+    }
+
+
+    // ---------- Email ----------
+    const emailValue = email.value.trim();
+
+    if (emailValue === "") {
+
+        showError(email, "Email address is required");
+        isValid = false;
+
+    } else if (
+        !/^[^\s@]+@[^\s@]+\.(com|in)$/i.test(emailValue)
+    ) {
+
+        showError(email, "Enter a valid .com or .in email address");
+        isValid = false;
+    }
+
+
+    // ---------- Service ----------
+    if (need.value === "") {
+
+        showError(need, "Please select a service");
+        isValid = false;
+    }
+
+
+    // ---------- Message ----------
+    const messageValue = message.value.trim();
+
+    if (messageValue.length > 500) {
+
+        showError(message, "Message cannot exceed 500 characters");
+        isValid = false;
+    }
+
+
+    // ---------- Final result ----------
+    if (!isValid) {
+
+        status.textContent = "Please correct the highlighted fields.";
+        status.classList.add("error");
+
+        return;
+    }
+
+
+    // Success
+    status.textContent =
+        contactForm.dataset.successMessage ||
+        "Thanks! Your message has been sent.";
+
+    status.classList.add("success");
+
+    contactForm.reset();
+});
+
+
+// ---------- Error function ----------
+function showError(input, message) {
+
+    const field = input.closest(".field");
+
+    field.classList.add("error");
+
+    const error = document.createElement("small");
+
+    error.className = "error-message";
+    error.textContent = message;
+
+    field.appendChild(error);
+}
+</script>
 </body>
 </html>

@@ -249,29 +249,79 @@
     </section>
 
     <!-- LOCATIONS -->
-    <section class="locations">
-        <div class="locations-list reveal">
-            <p class="eyebrow">Locations</p>
-            <h2>As Leading Home Health<br>Care Services Provided</h2>
-            <ul class="location-items" id="location-items">
-                <li class="active" data-city="Coimbatore" data-address="12 Race Course Rd, Coimbatore, TN 641018" data-phone="000 123 4567"><i class="fa-solid fa-location-dot"></i> Coimbatore</li>
-                <li data-city="Chennai" data-address="44 Anna Salai, Chennai, TN 600002" data-phone="000 234 5678"><i class="fa-solid fa-location-dot"></i> Chennai</li>
-                <li data-city="Bengaluru" data-address="9 MG Road, Bengaluru, KA 560001" data-phone="000 345 6789"><i class="fa-solid fa-location-dot"></i> Bengaluru</li>
-                <li data-city="Kochi" data-address="21 MG Road, Kochi, KL 682016" data-phone="000 456 7890"><i class="fa-solid fa-location-dot"></i> Kochi</li>
-                <li data-city="Madurai" data-address="5 Town Hall Rd, Madurai, TN 625001" data-phone="000 567 8901"><i class="fa-solid fa-location-dot"></i> Madurai</li>
-            </ul>
-            <a href="contact.html" class="btn btn-primary">View All Locations</a>
-        </div>
-        <div class="locations-map reveal">
-            <div class="map-dots" aria-hidden="true"></div>
-            <div class="map-pin" id="map-pin"><i class="fa-solid fa-location-dot"></i></div>
-            <div class="map-card">
-                <h3>Home Health Care — <span id="map-city">Coimbatore</span></h3>
-                <p><i class="fa-solid fa-location-dot"></i> <span id="map-address">12 Race Course Rd, Coimbatore, TN 641018</span></p>
-                <p><i class="fa-solid fa-envelope"></i> care@Stackly.example &nbsp; / &nbsp; <i class="fa-solid fa-phone"></i> <span id="map-phone">000 123 4567</span></p>
-            </div>
-        </div>
-    </section>
+<section class="locations">
+
+    <div class="locations-list reveal">
+        <p class="eyebrow">Locations</p>
+
+        <h2>Our Stackly<br>Office Locations</h2>
+
+        <ul class="location-items" id="location-items">
+
+            <li class="active"
+                data-city="Salem"
+                data-address="MMR Complex, Chinna Thirupathi, Salem, Tamil Nadu 636008"
+                data-map="https://www.google.com/maps?q=Stackly+Salem+Tamil+Nadu&output=embed">
+                <i class="fa-solid fa-location-dot"></i>
+                Salem — Headquarters
+            </li>
+
+            <li
+                data-city="Coimbatore"
+                data-address="79 Aiswarya Complex, Nethaji Road, PN Palayam, Coimbatore, Tamil Nadu 641037"
+                data-map="https://www.google.com/maps?q=Stackly+Coimbatore+Tamil+Nadu&output=embed">
+                <i class="fa-solid fa-location-dot"></i>
+                Coimbatore
+            </li>
+
+            <li
+                data-city="Chennai"
+                data-address="Ambika Complex, Urapakkam, Chennai, Tamil Nadu 603202"
+                data-map="https://www.google.com/maps?q=Stackly+Urapakkam+Chennai&output=embed">
+                <i class="fa-solid fa-location-dot"></i>
+                Chennai
+            </li>
+
+            <li
+                data-city="Bengaluru"
+                data-address="Begur-Koppa Road, Begur, Bengaluru, Karnataka 560068"
+                data-map="https://www.google.com/maps?q=Stackly+Begur+Bengaluru&output=embed">
+                <i class="fa-solid fa-location-dot"></i>
+                Bengaluru
+            </li>
+
+            <li
+                data-city="Hyderabad"
+                data-address="Ayyappa Society, Madhapur, Hyderabad, Telangana 500081"
+                data-map="https://www.google.com/maps?q=Stackly+Madhapur+Hyderabad&output=embed">
+                <i class="fa-solid fa-location-dot"></i>
+                Hyderabad
+            </li>
+
+        </ul>
+
+        <a href="contact.html" class="btn btn-primary">
+            View All Locations
+        </a>
+    </div>
+
+
+    <div class="locations-map reveal">
+
+        <iframe
+            id="google-map"
+            src="https://www.google.com/maps?q=Stackly+Salem+Tamil+Nadu&output=embed"
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+
+    </div>
+
+</section>
 
     <!-- TEAM -->
     <section class="team" id="team">

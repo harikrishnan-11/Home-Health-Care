@@ -113,27 +113,29 @@ document.addEventListener('DOMContentLoaded', () => {
     wireCarousel('service-track', 'svc-prev', 'svc-next');
     wireCarousel('story-track', 'story-prev', 'story-next');
 
-    /* ---------- Locations map interaction ---------- */
-    const locationItems = document.querySelectorAll('#location-items li');
-    const mapCity = document.getElementById('map-city');
-    const mapAddress = document.getElementById('map-address');
-    const mapPhone = document.getElementById('map-phone');
-    const mapPin = document.getElementById('map-pin');
-    const pinPositions = ['48% 52%', '62% 40%', '30% 58%', '20% 35%', '55% 65%'];
+/* ---------- Real Google Maps ---------- */
 
-    locationItems.forEach((li, i) => {
-        li.addEventListener('click', () => {
-            locationItems.forEach(el => el.classList.remove('active'));
-            li.classList.add('active');
-            mapCity.textContent = li.dataset.city;
-            mapAddress.textContent = li.dataset.address;
-            mapPhone.textContent = li.dataset.phone;
-            const [top, left] = pinPositions[i % pinPositions.length].split(' ');
-            mapPin.style.top = top;
-            mapPin.style.left = left;
+const locationItems = document.querySelectorAll('#location-items li');
+const googleMap = document.getElementById('google-map');
+
+locationItems.forEach((li) => {
+
+    li.addEventListener('click', () => {
+
+        // Remove active class
+        locationItems.forEach(item => {
+            item.classList.remove('active');
         });
+
+        // Add active class
+        li.classList.add('active');
+
+        // Change Google Map
+        googleMap.src = li.dataset.map;
+
     });
 
+});
     /* ---------- Back to top ---------- */
     const backToTop = document.getElementById('back-to-top');
     if (backToTop){
