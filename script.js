@@ -29,12 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ---------- Sticky nav shadow on scroll ---------- */
-    const nav = document.getElementById('site-nav');
-    if (nav){
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 40);
-        });
-    }
 
     /* ---------- Scroll reveal ---------- */
     const revealEls = document.querySelectorAll('.reveal');

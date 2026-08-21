@@ -11,6 +11,222 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="style.css">
+<style>
+    /* =========================================================
+   NEW SECTIONS — add-on styles
+   Append to style.css, or link as a second stylesheet
+   AFTER style.css so the tokens in :root are already defined.
+   ========================================================= */
+
+/* =========================================================
+   1. INSURANCE & PAYMENT
+   ========================================================= */
+.insurance{ max-width:1340px; margin:0 auto 110px; padding:0 50px; }
+.insurance-head{ max-width:640px; margin:0 auto 44px; text-align:center; }
+.insurance-head h2{ font-size:clamp(1.9rem, 3.2vw, 2.6rem); margin-bottom:16px; }
+.insurance-head .section-sub{ margin:0 auto; }
+
+.insurance-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+}
+.insurance-card{
+    position:relative;
+    display:flex; flex-wrap:wrap; align-items:center; gap:14px;
+    text-align:left; background:var(--white); border:1.5px solid var(--line);
+    border-radius:var(--radius-md); padding:22px 24px;
+    transition:border-color 0.3s var(--ease), box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.insurance-card:hover{ border-color:var(--primary); transform:translateY(-3px); box-shadow:var(--shadow-sm); }
+.insurance-icon{
+    width:46px; height:46px; border-radius:50%; flex:0 0 auto;
+    background:var(--secondary-soft); color:var(--primary);
+    display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+}
+.insurance-name{ font-weight:700; font-size:1.02rem; color:var(--primary-dark); flex:1; }
+.insurance-caret{
+    color:var(--ink-soft); font-size:0.85rem; transition:transform 0.35s var(--ease);
+}
+.insurance-card[aria-expanded="true"] .insurance-caret{ transform:rotate(180deg); color:var(--primary); }
+.insurance-card[aria-expanded="true"]{ border-color:var(--primary); box-shadow:var(--shadow-sm); }
+
+.insurance-detail{
+    flex-basis:100%; overflow:hidden; max-height:0; opacity:0;
+    color:var(--ink-soft); font-size:0.92rem; line-height:1.6;
+    transition:max-height 0.4s var(--ease), opacity 0.3s var(--ease), margin-top 0.4s var(--ease);
+    margin-top:0;
+}
+.insurance-card[aria-expanded="true"] .insurance-detail{
+    max-height:140px; opacity:1; margin-top:4px;
+}
+
+.insurance-note{
+    text-align:center; margin-top:30px; color:var(--ink-soft); font-size:0.94rem;
+}
+.insurance-note i{ color:var(--primary); margin-right:6px; }
+.insurance-note a{ color:var(--primary); font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+
+/* =========================================================
+   2. JOURNAL PREVIEW
+   ========================================================= */
+.journal-preview{ max-width:1340px; margin:0 auto 110px; padding:0 50px; }
+.journal-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:20px; margin-bottom:44px; flex-wrap:wrap; }
+.journal-head h2{ font-size:clamp(1.9rem, 3.2vw, 2.6rem); }
+
+.journal-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:26px; }
+.journal-card{
+    display:flex; flex-direction:column;
+    background:var(--white); border:1px solid var(--line); border-radius:var(--radius-md);
+    overflow:hidden; transition:transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.journal-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); }
+.journal-media{
+    aspect-ratio:16/10; overflow:hidden; position:relative;
+    background:linear-gradient(150deg,#cfd9da,#8fa9ac);
+}
+.journal-media img{ width:100%; height:100%; object-fit:cover; transition:transform 0.6s var(--ease); }
+.journal-card:hover .journal-media img{ transform:scale(1.08); }
+.journal-tag{
+    align-self:flex-start; margin:20px 24px 0;
+    background:var(--secondary-soft); color:var(--primary-dark);
+    font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em;
+    padding:6px 12px; border-radius:20px; font-weight:700;
+}
+.journal-card h3{ font-size:1.14rem; margin:14px 24px 10px; line-height:1.35; }
+.journal-card p{ color:var(--ink-soft); font-size:0.92rem; line-height:1.6; margin:0 24px 20px; }
+.journal-read{
+    margin:0 24px 24px; font-weight:600; font-size:0.9rem; color:var(--primary);
+    display:flex; align-items:center; gap:8px; margin-top:auto;
+}
+.journal-read i{ transition:transform 0.3s var(--ease); }
+.journal-card:hover .journal-read i{ transform:translateX(4px); }
+
+/* =========================================================
+   3. CAREERS
+   ========================================================= */
+.careers{ background:var(--primary); color:var(--white); padding:90px 50px; }
+.careers-inner{
+    max-width:1340px; margin:0 auto;
+    display:grid; grid-template-columns:0.85fr 1.15fr; gap:60px; align-items:center;
+}
+.careers-copy h2{ color:var(--white); font-size:clamp(1.9rem, 3.2vw, 2.6rem); margin-bottom:16px; }
+.careers-sub{ color:rgba(255,255,255,0.78); margin-bottom:30px; }
+.careers-stats{ display:flex; gap:34px; margin-bottom:34px; flex-wrap:wrap; }
+.careers-stats strong{ display:block; font-family:var(--f-display); font-size:2rem; font-weight:800; color:var(--secondary); }
+.careers-stats span{ font-size:0.8rem; color:rgba(255,255,255,0.7); font-family:var(--f-mono); text-transform:uppercase; letter-spacing:0.05em; }
+
+.careers-panel{
+    background:var(--white); border-radius:var(--radius-lg); padding:36px; box-shadow:var(--shadow-md);
+}
+.role-tabs{ display:flex; gap:8px; margin-bottom:26px; flex-wrap:wrap; }
+.role-tab{
+    padding:11px 20px; border-radius:24px; border:1.5px solid var(--line); background:var(--cream);
+    color:var(--ink-soft); font-weight:600; font-size:0.9rem;
+    transition:background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.role-tab.active, .role-tab:hover{ background:var(--primary); color:var(--secondary-soft); border-color:var(--primary); }
+
+.role-content{ display:none; }
+.role-content.active{ display:block; animation:fadeIn 0.4s var(--ease); }
+@keyframes fadeIn{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:translateY(0); } }
+.role-content h4{ font-size:1.3rem; margin-bottom:10px; }
+.role-content p{ color:var(--ink-soft); line-height:1.65; margin-bottom:18px; }
+.role-content ul{ display:flex; flex-direction:column; gap:10px; }
+.role-content li{ display:flex; align-items:flex-start; gap:10px; font-size:0.94rem; color:var(--ink); }
+.role-content li i{ color:var(--primary); margin-top:3px; }
+
+/* =========================================================
+   4. FAMILY APP
+   ========================================================= */
+.family-app{
+    max-width:1340px; margin:0 auto 110px; padding:0 50px;
+    display:grid; grid-template-columns:1fr 0.7fr; gap:60px; align-items:center;
+}
+.app-copy h2{ font-size:clamp(1.9rem, 3.2vw, 2.6rem); margin-bottom:16px; }
+.app-copy .section-sub{ margin-bottom:30px; }
+
+.app-tabs{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+.app-tab{
+    padding:10px 18px; border-radius:24px; border:1.5px solid var(--line); background:var(--white);
+    color:var(--ink-soft); font-weight:600; font-size:0.88rem;
+    transition:background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.app-tab.active, .app-tab:hover{ background:var(--secondary); color:var(--primary-dark); border-color:var(--secondary); }
+
+.app-tab-content{ display:none; margin-bottom:30px; min-height:52px; }
+.app-tab-content.active{ display:block; animation:fadeIn 0.4s var(--ease); }
+.app-tab-content p{ color:var(--ink-soft); line-height:1.7; max-width:42ch; }
+
+.app-store-row{ display:flex; gap:14px; flex-wrap:wrap; }
+.store-btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:13px 22px; border-radius:30px; background:var(--primary-dark); color:var(--white);
+    font-weight:600; font-size:0.9rem; transition:transform 0.3s var(--ease), background 0.3s var(--ease);
+}
+.store-btn:hover{ background:var(--primary); transform:translateY(-2px); }
+.store-btn i{ font-size:1.1rem; color:var(--secondary); }
+
+.app-mockup{ display:flex; justify-content:center; }
+.phone{
+    width:260px; aspect-ratio:9/18.5; background:var(--primary-dark); border-radius:38px;
+    padding:14px; box-shadow:var(--shadow-md); position:relative;
+}
+.phone-notch{
+    position:absolute; top:14px; left:50%; transform:translateX(-50%);
+    width:80px; height:18px; background:var(--primary-dark); border-radius:0 0 14px 14px; z-index:2;
+}
+.phone-screen{
+    background:var(--cream); width:100%; height:100%; border-radius:26px;
+    padding:34px 16px 16px; display:flex; flex-direction:column; gap:12px; overflow:hidden;
+}
+.phone-app-title{ font-family:var(--f-display); font-weight:700; color:var(--primary-dark); font-size:1rem; margin-bottom:4px; }
+.phone-card{
+    background:var(--white); border-radius:14px; padding:12px; display:flex; align-items:center; gap:10px;
+    box-shadow:0 4px 12px rgba(7,50,56,0.08); font-size:0.78rem;
+}
+.phone-card strong{ display:block; font-size:0.82rem; color:var(--primary-dark); }
+.phone-card span{ color:var(--ink-soft); font-size:0.7rem; }
+.phone-avatar{
+    width:32px; height:32px; border-radius:50%; background:var(--primary); color:var(--secondary-soft);
+    display:flex; align-items:center; justify-content:center; font-family:var(--f-mono); font-size:0.68rem; flex:0 0 auto;
+}
+.phone-check{ color:#2e9c5b; margin-left:auto; font-size:1rem; }
+.phone-card-note{ align-items:flex-start; }
+.phone-card-note i{ color:var(--secondary); margin-top:2px; }
+.phone-card-note p{ color:var(--ink-soft); line-height:1.45; font-size:0.74rem; }
+.phone-card-mini{ font-size:0.76rem; color:var(--ink-soft); font-weight:600; }
+.phone-card-mini i{ color:var(--primary); }
+
+/* =========================================================
+   RESPONSIVE — mirrors existing breakpoints (1180 / 1024 / 720)
+   ========================================================= */
+@media (max-width:1180px){
+    .insurance-grid{ grid-template-columns:repeat(2, 1fr); }
+    .journal-grid{ grid-template-columns:repeat(2, 1fr); }
+    .careers-inner{ grid-template-columns:1fr; }
+    .careers-panel{ order:2; }
+    .family-app{ grid-template-columns:1fr; }
+    .app-mockup{ order:-1; margin-bottom:10px; }
+}
+
+@media (max-width:1024px){
+    .careers-stats{ gap:26px; }
+}
+
+@media (max-width:720px){
+    .insurance, .journal-preview, .family-app{ padding-left:24px; padding-right:24px; }
+    .careers{ padding:60px 24px; }
+    .insurance-grid{ grid-template-columns:1fr; }
+    .journal-grid{ grid-template-columns:1fr; }
+    .journal-head{ flex-direction:column; align-items:flex-start; }
+    .careers-panel{ padding:26px 22px; }
+    .role-tabs{ gap:6px; }
+    .role-tab{ padding:9px 16px; font-size:0.84rem; }
+    .careers-stats{ width:100%; justify-content:space-between; gap:12px; }
+    .phone{ width:220px; }
+    .app-tabs{ gap:6px; }
+    .app-tab{ padding:9px 14px; font-size:0.82rem; }
+}
+</style>
 </head>
 <body>
 
@@ -30,7 +246,7 @@
     </div>
 </header>
 
-<nav id="site-nav">
+<nav id="site-nav" style="position: sticky;">
     <a href="index.html" class="logo" aria-label="Stackly home">
        <img src="./src/logo/Untitled design (7).webp" alt="">
     </a>
@@ -366,15 +582,15 @@
         <div class="story-track reveal" id="story-track">
             <article class="story-card">
                 <p>"My father looks forward to Tuesdays now — that's when his home health coordinator visits. That alone tells me everything."</p>
-                <div class="story-person"><span class="story-avatar">DR</span><div><strong>Deepa R.</strong><span>Daughter, Coimbatore</span></div></div>
+                <div class="story-person"><span class="story-avatar" style="color:wheat;">DR</span><div><strong>Deepa R.</strong><span>Daughter, Coimbatore</span></div></div>
             </article>
             <article class="story-card">
                 <p>"The physiotherapy plan was rebuilt twice as my mother improved, all delivered at home. They actually pay attention to progress."</p>
-                <div class="story-person"><span class="story-avatar">SN</span><div><strong>Suresh N.</strong><span>Son, Chennai</span></div></div>
+                <div class="story-person"><span class="story-avatar" style="color:wheat;">SN</span><div><strong>Suresh N.</strong><span>Son, Chennai</span></div></div>
             </article>
             <article class="story-card">
                 <p>"After my surgery, the home health team checked in daily. I never once felt like a case number."</p>
-                <div class="story-person"><span class="story-avatar">KP</span><div><strong>Kavitha P.</strong><span>Client, Bengaluru</span></div></div>
+                <div class="story-person"><span class="story-avatar" style="color:wheat;">KP</span><div><strong>Kavitha P.</strong><span>Client, Bengaluru</span></div></div>
             </article>
         </div>
     </section>
@@ -414,6 +630,220 @@
             <span>Wellness Partners</span>
         </div>
     </section>
+
+    <!-- =========================================================
+     PASTE EACH SECTION BELOW INTO index.html, INSIDE <main>...</main>
+     Suggested placement:
+       - #insurance        → after "care-plans" section, before "contact"
+       - #journal-preview  → after "gallery" section, before "faq"
+       - #careers          → after "donors" section (dark band, like team/highlights)
+       - #family-app       → after "faq" section, before "donors"
+     Adjust order to taste — each section is self-contained.
+     Needs: new-sections.css linked after style.css, new-sections.js linked after pages.js
+     ========================================================= -->
+
+<!-- ============ 1. INSURANCE & PAYMENT ============ -->
+<section class="insurance" id="insurance" style="margin-top: 50px;">
+    <div class="insurance-head reveal">
+        <p class="eyebrow">Insurance &amp; Payment</p>
+        <h2>We Make Paying<br>For Care Simple</h2>
+        <p class="section-sub">Every family's coverage looks different. Tap a option below to see what it typically includes — your coordinator confirms your exact benefits within 24 hours, free of charge.</p>
+    </div>
+
+    <div class="insurance-grid reveal" id="insurance-grid">
+        <button class="insurance-card" data-target="ins-1" aria-expanded="false">
+            <span class="insurance-icon"><i class="fa-solid fa-hospital"></i></span>
+            <span class="insurance-name">Medicare</span>
+            <i class="fa-solid fa-chevron-down insurance-caret"></i>
+            <span class="insurance-detail" id="ins-1">Covers medically necessary home nursing, physical therapy and post-hospitalization visits when ordered by a physician.</span>
+        </button>
+
+        <button class="insurance-card" data-target="ins-2" aria-expanded="false">
+            <span class="insurance-icon"><i class="fa-solid fa-house-medical"></i></span>
+            <span class="insurance-name">Medicaid</span>
+            <i class="fa-solid fa-chevron-down insurance-caret"></i>
+            <span class="insurance-detail" id="ins-2">Income-qualified families can access personal care and daily living support at little to no out-of-pocket cost.</span>
+        </button>
+
+        <button class="insurance-card" data-target="ins-3" aria-expanded="false">
+            <span class="insurance-icon"><i class="fa-solid fa-file-shield"></i></span>
+            <span class="insurance-name">Private Insurance</span>
+            <i class="fa-solid fa-chevron-down insurance-caret"></i>
+            <span class="insurance-detail" id="ins-3">We bill most major providers directly and handle the paperwork, so you're not stuck faxing forms.</span>
+        </button>
+
+        <button class="insurance-card" data-target="ins-4" aria-expanded="false">
+            <span class="insurance-icon"><i class="fa-solid fa-clock-rotate-left"></i></span>
+            <span class="insurance-name">Long-Term Care</span>
+            <i class="fa-solid fa-chevron-down insurance-caret"></i>
+            <span class="insurance-detail" id="ins-4">We prepare the documentation long-term care policies require, and file claims on your family's behalf.</span>
+        </button>
+
+        <button class="insurance-card" data-target="ins-5" aria-expanded="false">
+            <span class="insurance-icon"><i class="fa-solid fa-briefcase"></i></span>
+            <span class="insurance-name">Corporate Plans</span>
+            <i class="fa-solid fa-chevron-down insurance-caret"></i>
+            <span class="insurance-detail" id="ins-5">Several employer wellness and eldercare benefit programs cover a portion of hourly or daily visits.</span>
+        </button>
+
+        <button class="insurance-card" data-target="ins-6" aria-expanded="false">
+            <span class="insurance-icon"><i class="fa-solid fa-hand-holding-dollar"></i></span>
+            <span class="insurance-name">Self-Pay</span>
+            <i class="fa-solid fa-chevron-down insurance-caret"></i>
+            <span class="insurance-detail" id="ins-6">Straightforward hourly, daily and live-in rates with no hidden fees — pay by card, bank transfer or UPI.</span>
+        </button>
+    </div>
+
+    <p class="insurance-note reveal"><i class="fa-solid fa-circle-info"></i> Not sure what's covered? <a href="contact.html">Talk to a coordinator</a> — most families get an answer the same day.</p>
+</section>
+
+<!-- ============ 2. JOURNAL PREVIEW ============ -->
+<section class="journal-preview" id="journal-preview">
+    <div class="journal-head reveal">
+        <div>
+            <p class="eyebrow">From The Journal</p>
+            <h2>Stories &amp; Advice<br>For Families</h2>
+        </div>
+        <a href="journal.html" class="btn btn-ghost">Read The Journal</a>
+    </div>
+
+    <div class="journal-grid reveal">
+        <a href="journal.html" class="journal-card">
+            <div class="journal-media jm-1"><img src="./src/images/image-4-compressed.webp" alt="Senior enjoying a relaxed activity at home" loading="lazy"></div>
+            <span class="journal-tag">Caregiving</span>
+            <h3>Six Ways To Ease A Parent Into Home Care</h3>
+            <p>What to say — and what to avoid — in the first conversation about bringing help into the house.</p>
+            <span class="journal-read">Read Story <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <a href="journal.html" class="journal-card">
+            <div class="journal-media jm-2"><img src="./src/images/image-7-compressed.webp" alt="Home health caregiver assisting a senior woman with daily care" loading="lazy"></div>
+            <span class="journal-tag">Recovery</span>
+            <h3>Recovering At Home After Surgery: A Family Checklist</h3>
+            <p>The questions to ask before discharge so the first week home goes smoothly, not chaotically.</p>
+            <span class="journal-read">Read Story <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <a href="journal.html" class="journal-card">
+            <div class="journal-media jm-3"><img src="./src/images/image-8-compressed.webp" alt="Elderly woman and home health caregiver in gentle conversation" loading="lazy"></div>
+            <span class="journal-tag">Memory Care</span>
+            <h3>Understanding Memory Care Without The Jargon</h3>
+            <p>A plain-language guide to what memory care at home actually looks like, day to day.</p>
+            <span class="journal-read">Read Story <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+    </div>
+</section>
+
+<!-- ============ 3. CAREERS ============ -->
+<section class="careers" id="careers">
+    <div class="careers-inner">
+        <div class="careers-copy reveal">
+            <p class="eyebrow eyebrow-light">Careers At Stackly</p>
+            <h2>Join Our<br>Home Care Team</h2>
+            <p class="section-sub careers-sub">We hire for warmth first and train for skill second. Pick a role to see what a week actually looks like.</p>
+
+            <div class="careers-stats">
+                <div><strong>120+</strong><span>Hrs Paid Training</span></div>
+                <div><strong>68%</strong><span>Promoted Internally</span></div>
+                <div><strong>5</strong><span>Cities Hiring Now</span></div>
+            </div>
+            <a href="contact.html" class="btn btn-secondary">Apply Now</a>
+        </div>
+
+        <div class="careers-panel reveal">
+            <div class="role-tabs" role="tablist">
+                <button class="role-tab active" data-role="caregiver" role="tab" aria-selected="true">Caregiver</button>
+                <button class="role-tab" data-role="nurse" role="tab" aria-selected="false">Home Nurse</button>
+                <button class="role-tab" data-role="coordinator" role="tab" aria-selected="false">Coordinator</button>
+            </div>
+
+            <div class="role-content active" id="role-caregiver">
+                <h4>Home Health Caregiver</h4>
+                <p>Support one or two families with daily living, companionship and light nursing tasks, on a schedule built around your availability.</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> No prior certification required — we train you</li>
+                    <li><i class="fa-solid fa-check"></i> Matched to families near your home</li>
+                    <li><i class="fa-solid fa-check"></i> Weekly pay, flexible shifts</li>
+                </ul>
+            </div>
+
+            <div class="role-content" id="role-nurse">
+                <h4>Home Nurse</h4>
+                <p>Deliver clinical care — medication management, wound care, vitals monitoring — as part of a supervised in-home care plan.</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Active nursing license required</li>
+                    <li><i class="fa-solid fa-check"></i> On-call clinical support from our medical lead</li>
+                    <li><i class="fa-solid fa-check"></i> Mileage and travel time paid</li>
+                </ul>
+            </div>
+
+            <div class="role-content" id="role-coordinator">
+                <h4>Home Care Coordinator</h4>
+                <p>Own the relationship between families and caregivers — scheduling, check-ins, and adjusting care plans as needs change.</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Prior care or hospitality experience preferred</li>
+                    <li><i class="fa-solid fa-check"></i> Hybrid: office plus in-home visits</li>
+                    <li><i class="fa-solid fa-check"></i> Clear path to team lead within a year</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ 4. FAMILY APP ============ -->
+<section class="family-app" id="family-app"  style="margin-top: 50px;">
+    <div class="app-copy reveal">
+        <p class="eyebrow">Family App</p>
+        <h2>Every Visit,<br>Visible To Your Family</h2>
+        <p class="section-sub">Our free family app keeps everyone who cares about your loved one on the same page — without a single group chat.</p>
+
+        <div class="app-tabs">
+            <button class="app-tab active" data-app="updates">Care Updates</button>
+            <button class="app-tab" data-app="schedule">Schedule</button>
+            <button class="app-tab" data-app="messages">Messages</button>
+        </div>
+
+        <div class="app-tab-content active" id="app-updates">
+            <p>Every visit ends with a short note and photo from the caregiver — meals, mood, mobility — sent straight to the family app.</p>
+        </div>
+        <div class="app-tab-content" id="app-schedule">
+            <p>See every upcoming visit, who's coming, and reschedule or add an extra visit in two taps.</p>
+        </div>
+        <div class="app-tab-content" id="app-messages">
+            <p>Message the coordinator directly for anything non-urgent — no phone tag, no waiting on hold.</p>
+        </div>
+
+        <div class="app-store-row">
+            <a href="./404.html" class="store-btn"><i class="fa-brands fa-apple"></i> App Store</a>
+            <a href="./404.html" class="store-btn"><i class="fa-brands fa-google-play"></i> Google Play</a>
+        </div>
+    </div>
+
+    <div class="app-mockup reveal" aria-hidden="true">
+        <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+                <p class="phone-app-title">Today's Visit</p>
+                <div class="phone-card">
+                    <span class="phone-avatar">MK</span>
+                    <div>
+                        <strong>Meera K.</strong>
+                        <span>Checked in · 9:04 AM</span>
+                    </div>
+                    <i class="fa-solid fa-circle-check phone-check"></i>
+                </div>
+                <div class="phone-card phone-card-note">
+                    <i class="fa-solid fa-note-sticky"></i>
+                    <p>"Had a good breakfast, walked in the garden for 15 minutes. In great spirits today."</p>
+                </div>
+                <div class="phone-card phone-card-mini">
+                    <i class="fa-solid fa-pills"></i>
+                    <span>Morning meds given on time</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 </main>
 
@@ -467,5 +897,74 @@
 
 <script src="script.js"></script>
 <script src="pages.js"></script>
+<script>
+    /* =========================================================
+   NEW SECTIONS — interactions
+   Link this file after script.js / pages.js.
+   Note: reveal-on-scroll for .reveal elements is assumed to
+   already be handled globally by script.js (it drives every
+   other section on the page the same way). This file only
+   adds the interactive pieces unique to the 4 new sections.
+   ========================================================= */
+(function () {
+    "use strict";
+
+    /* ---------- 1. Insurance accordion ---------- */
+    const insuranceCards = document.querySelectorAll(".insurance-card");
+    insuranceCards.forEach((card) => {
+        card.addEventListener("click", () => {
+            const isOpen = card.getAttribute("aria-expanded") === "true";
+
+            // Close any other open card (one open at a time)
+            insuranceCards.forEach((other) => {
+                if (other !== card) other.setAttribute("aria-expanded", "false");
+            });
+
+            card.setAttribute("aria-expanded", String(!isOpen));
+        });
+    });
+
+    /* ---------- 2. Journal preview ---------- */
+    // Purely a link grid — no extra JS required.
+
+    /* ---------- 3. Careers role tabs ---------- */
+    const roleTabs = document.querySelectorAll(".role-tab");
+    const roleContents = document.querySelectorAll(".role-content");
+
+    roleTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            const role = tab.getAttribute("data-role");
+
+            roleTabs.forEach((t) => {
+                t.classList.remove("active");
+                t.setAttribute("aria-selected", "false");
+            });
+            tab.classList.add("active");
+            tab.setAttribute("aria-selected", "true");
+
+            roleContents.forEach((panel) => {
+                panel.classList.toggle("active", panel.id === `role-${role}`);
+            });
+        });
+    });
+
+    /* ---------- 4. Family app tabs ---------- */
+    const appTabs = document.querySelectorAll(".app-tab");
+    const appContents = document.querySelectorAll(".app-tab-content");
+
+    appTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            const target = tab.getAttribute("data-app");
+
+            appTabs.forEach((t) => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            appContents.forEach((panel) => {
+                panel.classList.toggle("active", panel.id === `app-${target}`);
+            });
+        });
+    });
+})();
+</script>
 </body>
 </html>

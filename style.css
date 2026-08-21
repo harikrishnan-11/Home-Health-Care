@@ -28,9 +28,7 @@
 
 *{ margin:0; padding:0; box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
-html, body{ width:100%; overflow-x:hidden; background:var(--cream); color:var(--ink); font-family:var(--f-body); }
-img{ max-width:100%; display:block; }
-a{ color:inherit; text-decoration:none; }
+html, body{ width:100%; overflow-x:clip; background:var(--cream); color:var(--ink); font-family:var(--f-body); }a{ color:inherit; text-decoration:none; }
 button{ font-family:inherit; cursor:pointer; }
 ul{ list-style:none; }
 
